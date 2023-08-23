@@ -32,7 +32,7 @@ class Mapper:
     )
     
     @staticmethod
-    def get_coord(address: str) -> Point: # get coordinate given address
+    def _get_coord(address: str) -> Point: # get coordinate given address
         url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{ quote(address) }.json?access_token=pk.eyJ1IjoiYW5heWFwIiwiYSI6ImNrcTFndGM0NTAzcWIycHBpZHhoenUxeWIifQ.2IvOWRA9LYQlxBk9j7_WaQ"
         response = requests.get(url)
         
@@ -45,7 +45,7 @@ class Mapper:
 
 
     @staticmethod
-    def get_precinct(coord: Point) -> Precinct: # get precinct for given coordinates
+    def _get_precinct(coord: Point) -> Precinct: # get precinct for given coordinates
         geo_rows = Mapper._precinct_table.loc[Mapper._precinct_table["geometry"].contains(coord)]
         geo_row = geo_rows.iloc[0]
         precinct = Precinct(
@@ -58,4 +58,9 @@ class Mapper:
             poly=geo_row["geometry"]
         )
         return precinct
+    
+    @staticmethod
+    def get_precinct(address: str) -> Precinct: # get precinct for given address
+        coord = Mapper._get_coord(address)
+        return Mapper._get_precinct(coord)
         
