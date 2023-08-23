@@ -1,0 +1,169 @@
+{
+  "municipality": "Seattle",
+  "state": "WA", 
+  "elections": [
+    {
+      "election_type": "Primary",
+      "registration_deadline": 1690243199,
+      "voting_open": 1690588800,
+      "voting_close": 1690945200,
+      "contests": [
+        {
+          "contest_type": "Port Commissioner",
+          "districts": []
+        },
+        {
+          "contest_type": "School District",
+          "districts": []
+        },
+        {
+          "contest_type": "City Council",
+          "districts": [
+            {
+              "district_number": 2,
+              "candidates": [
+                {
+                  "first_name": "Tammy",
+                  "last_name": "Morales",
+                  "values": 
+                  [
+                    { "value": "Social Welfare Initiatives", "rating": 20 },
+                    { "value": "Police and Justice Reform", "rating": 19 },
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 18 },
+                    { "value": "Sustainable Urban Planning and Development", "rating": 17 },
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 16 },
+                    { "value": "Public Safety and Crime Prevention", "rating": 15 },
+                    { "value": "Local Business Initiatives", "rating": 14 },
+                    { "value": "Public Works and Infrastructure", "rating": 13 },
+                    { "value": "Public Accessibility and Transit", "rating": 12 },
+                    { "value": "Electoral Transparency and Accountability", "rating": 11 },
+                    { "value": "Fiscal Management and Reform", "rating": 10 },
+                    { "value": "Culture and Recreation Initiatives", "rating": 9 }   
+                  ]
+                },
+                {
+                  "first_name": "Tanya",
+                  "last_name": "Woo",
+                  "values": [	
+                    { "value": "Police and Justice Reform", "rating": 20 },	
+                    { "value": "Public Safety and Crime Prevention", "rating": 19 },	
+                    { "value": "Social Welfare Initiatives", "rating": 18 },	
+                    { "value": "Electoral Transparency and Accountability", "rating": 17 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 16 },	
+                    { "value": "Public Works and Infrastructure", "rating": 15 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 14 },	
+                    { "value": "Public Accessibility and Transit", "rating": 13 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 12 },	
+                    { "value": "Fiscal Management and Reform", "rating": 11 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 10 },
+                    { "value": "Local Business Initiatives", "rating": 9 }	
+                  ] 
+                },
+                {
+                  "first_name": "Margaret",
+                  "last_name": "Elisabeth",
+                  "values": 
+                  [	
+                    { "value": "Social Welfare Initiatives", "rating": 20 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 19 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 18 },	
+                    { "value": "Public Accessibility and Transit", "rating": 17 },	
+                    { "value": "Public Safety and Crime Prevention", "rating": 16 },	
+                    { "value": "Fiscal Management and Reform", "rating": 15 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 14 },	
+                    { "value": "Public Works and Infrastructure", "rating": 12 },	
+                    { "value": "Local Business Initiatives", "rating": 11 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 10 },
+                    { "value": "Electoral Transparency and Accountability", "rating": 9 },	
+                    { "value": "Police and Justice Reform", "rating": 8 }
+                  ]
+                }
+              ]
+            },
+            {
+              "district_number": 4,
+              "candidates": [
+                {
+                  "first_name": "Ron",
+                  "last_name": "Davis",
+                  "values": 
+                  [	
+                    { "value": "Public Safety and Crime Prevention", "rating": 20 },	
+                    { "value": "Social Welfare Initiatives", "rating": 19 },	
+                    { "value": "Police and Justice Reform", "rating": 18 },	
+                    { "value": "Public Accessibility and Transit", "rating": 17 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 16 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 15 },	
+                    { "value": "Electoral Transparency and Accountability", "rating": 14 },	
+                    { "value": "Public Works and Infrastructure", "rating": 13 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 12 },	
+                    { "value": "Fiscal Management and Reform", "rating": 11 },	
+                    { "value": "Local Business Initiatives", "rating": 10 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 9 }
+                  ]
+                },
+                {
+                  "first_name": "Ken",
+                  "last_name": "Wilson",
+                  "values": 
+                  [	
+                    { "value": "Social Welfare Initiatives", "rating": 13 },	
+                    { "value": "Police and Justice Reform", "rating": 18 },	
+                    { "value": "Electoral Transparency and Accountability", "rating": 10 },	
+                    { "value": "Public Accessibility and Transit", "rating": 17 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 11 },	
+                    { "value": "Public Safety and Crime Prevention", "rating": 20 },	
+                    { "value": "Public Works and Infrastructure", "rating": 19 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 16 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 14 },	
+                    { "value": "Fiscal Management and Reform", "rating": 12 },	
+                    { "value": "Local Business Initiatives", "rating": 15 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 9 }
+                  ]
+                },
+                {
+                  "first_name": "Maritza",
+                  "last_name": "Rivera",
+                  "values": 
+                  [	
+                    { "value": "Public Safety and Crime Prevention", "rating": 20 },	
+                    { "value": "Police and Justice Reform", "rating": 19 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 18 },	
+                    { "value": "Social Welfare Initiatives", "rating": 17 },	
+                    { "value": "Local Business Initiatives", "rating": 16 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 15 },	
+                    { "value": "Fiscal Management and Reform", "rating": 13 },	
+                    { "value": "Public Works and Infrastructure", "rating": 12 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 11 },
+                    { "value": "Electoral Transparency and Accountability", "rating": 10 },	
+                    { "value": "Public Accessibility and Transit", "rating": 9 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 8 }
+                  ]
+                },
+                {
+                  "first_name": "George",
+                  "last_name": "Artem",
+                  "values": 
+                  [	
+                    { "value": "Police and Justice Reform", "rating": 20 },	
+                    { "value": "Public Safety and Crime Prevention", "rating": 19 },	
+                    { "value": "Electoral Transparency and Accountability", "rating": 18 },	
+                    { "value": "Public Accessibility and Transit", "rating": 11 },	
+                    { "value": "Sustainable Urban Planning and Development", "rating": 17 },	
+                    { "value": "Fiscal Management and Reform", "rating": 16 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 15 },	
+                    { "value": "Social Welfare Initiatives", "rating": 14 },	
+                    { "value": "Local Business Initiatives", "rating": 13 },	
+                    { "value": "Public Works and Infrastructure", "rating": 12 },	
+                    { "value": "Culture and Recreation Initiatives", "rating": 10 },
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 9 }	
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
