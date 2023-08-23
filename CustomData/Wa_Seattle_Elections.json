@@ -107,17 +107,17 @@
                   "last_name": "Wilson",
                   "values": 
                   [	
-                    { "value": "Social Welfare Initiatives", "rating": 13 },	
-                    { "value": "Police and Justice Reform", "rating": 18 },	
-                    { "value": "Electoral Transparency and Accountability", "rating": 10 },	
-                    { "value": "Public Accessibility and Transit", "rating": 17 },	
-                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 11 },	
                     { "value": "Public Safety and Crime Prevention", "rating": 20 },	
                     { "value": "Public Works and Infrastructure", "rating": 19 },	
+                    { "value": "Police and Justice Reform", "rating": 18 },	
+                    { "value": "Public Accessibility and Transit", "rating": 17 },	
                     { "value": "Sustainable Urban Planning and Development", "rating": 16 },	
-                    { "value": "Environmental Management and Climate Initiatives", "rating": 14 },	
-                    { "value": "Fiscal Management and Reform", "rating": 12 },	
                     { "value": "Local Business Initiatives", "rating": 15 },	
+                    { "value": "Environmental Management and Climate Initiatives", "rating": 14 },	
+                    { "value": "Social Welfare Initiatives", "rating": 13 },	
+                    { "value": "Fiscal Management and Reform", "rating": 12 },	
+                    { "value": "Public Health Initiatives and Emergency Preparedness", "rating": 11 },	
+                    { "value": "Electoral Transparency and Accountability", "rating": 10 },	
                     { "value": "Culture and Recreation Initiatives", "rating": 9 }
                   ]
                 },
