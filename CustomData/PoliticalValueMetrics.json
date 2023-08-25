@@ -1,0 +1,19 @@
+[
+  {
+    "contest_type": "City Council",
+    "values": [
+      { "id": 1, "name": "Electoral Transparency", "rating": 0 },
+      { "id": 2, "name": "Environmental Stewardship", "rating": 0 },
+      { "id": 3, "name": "Local Business Initiatives", "rating": 0 },
+      { "id": 4, "name": "Fiscal Management", "rating": 0 },
+      { "id": 5, "name": "Transit and Accessibility", "rating": 0 },
+      { "id": 6, "name": "Crime Prevention", "rating": 0 },
+      { "id": 7, "name": "Sustainable Development", "rating": 0 },
+      { "id": 8, "name": "Social Welfare Initiatives", "rating": 0 },
+      { "id": 9, "name": "Culture and Recreation", "rating": 0 },
+      { "id": 10, "name": "Works and Infrastructure", "rating": 0 },
+      { "id": 11, "name": "Health and Emergency Initiatives", "rating": 0 },
+      { "id": 12, "name": "Justice Reform", "rating": 0 }
+    ]
+  }
+]
