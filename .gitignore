@@ -161,3 +161,6 @@ cython_debug/
 
 # Jupyter Notebooks
 *.ipynb
+
+# Mac File system metadata
+.DS_Store
