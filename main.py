@@ -1,8 +1,7 @@
 import json
 import datetime
-from Judging.drafter import Drafter
-
-from Mapping.mapper import Mapper
+from clearvote.utils.Judging.drafter import Drafter
+from clearvote.utils.Mapping.mapper import Mapper
 
 def get_values(file_path, contest_type):
     with open(file_path, 'r') as f:
@@ -23,7 +22,7 @@ if __name__ == '__main__':
 
     # TODO: "Are you registered to vote at your current address?"
     # Page 2
-    file_path = 'CustomData/Wa_Seattle_Elections.json'
+    file_path = 'clearvote/static/Data/CustomData/Wa_Seattle_Elections.json'
     with open(file_path, 'r') as f:
         data = json.load(f)
     

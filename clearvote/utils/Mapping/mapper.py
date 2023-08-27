@@ -2,7 +2,7 @@ from shapely.geometry import Polygon, Point
 import geopandas
 import pandas as pd
 import requests
-from Mapping.precinct import Precinct
+from clearvote.utils.Mapping.precinct import Precinct
 import json
 from urllib.parse import quote
 
@@ -24,9 +24,9 @@ class Mapper:
         return precinct_table
     
     _precinct_table = _generate_precinct_table.__func__(
-        "Data/Voting_Districts_of_King_County___votdst_area.geojson",
+        "clearvote/static/Data/Precincts/Voting_Districts_of_King_County___votdst_area.geojson",
         "votdst",
-        "Data/precinct-and-district-data.csv",
+        "clearvote/static/Data/Precincts/precinct-and-district-data.csv",
         "PrecinctCode",
         drop=["PrecinctName", "PrecinctCode"]
     )
