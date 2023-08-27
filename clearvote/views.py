@@ -12,4 +12,4 @@ def address():
     form = AddressForm()
     if form.validate_on_submit():
         return f"Address: {form.address.data}"
-    return render_template("address.html", form=form)
+    return render_template("address_lookup.html", form=form)
