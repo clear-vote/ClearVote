@@ -16,7 +16,7 @@ if __name__ == '__main__':
     
 
     # TODO: Create a basic front-end for all of this
-    # TODO: Address input validation -> (eg. confirm the address is in the municipality SEATTLE and the state WA)
+    # TODO: STRETCH Address input validation -> (eg. confirm the address is in the municipality SEATTLE and the state WA)
     # Page 1
     user_input = str(input("Enter your address: "))
 
@@ -33,7 +33,8 @@ if __name__ == '__main__':
     print("In person voting begins", datetime.datetime.fromtimestamp(election["voting_open"]).strftime('%A, %d %B %Y, at %I:%M %p'))
     print("Ballots must be cast by", datetime.datetime.fromtimestamp(election["voting_close"]).strftime('%A, %d %B %Y, at %I:%M %p'))
     
-    # TODO: Add support for every candidate in every district in Seattle
+    
+    # TODO: Add support for every candidate in every district in Seattle (with ChatGPT and Firebase)
     # Page 3
     print("Voting information for", user_input)
     Drafter.print_election_data(data)
