@@ -8,11 +8,15 @@
         {% else %}
         <title>Hey! You forgot a title!</title>
         {% endif %}
-        
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/base.css') }}">
         {% block head %} {% endblock %}
     </head>
     <body>
         {% block content %}
         {% endblock %}
+
+        
+        <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
+        {% block scripts %} {% endblock %}
     </body>
 </html>
