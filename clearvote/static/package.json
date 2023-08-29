@@ -1,0 +1,25 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile_sass": "sass --watch scss:assets/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jkru3/ClearVote.git"
+  },
+  "author": "ClearVote",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkru3/ClearVote/issues"
+  },
+  "homepage": "https://github.com/jkru3/ClearVote#readme",
+  "devDependencies": {
+    "sass": "^1.66.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  }
+}
