@@ -1,17 +1,18 @@
 import typing
 from shapely import Polygon
 
+
 class Precinct(object):
     def __init__(
-            self,
-            code: int,
-            name: str,
-            county_council: int,
-            leg_dist: int,
-            cong_dist: int,
-            seattle_council_dist: int,
-            poly: Polygon
-            ):
+        self,
+        code: int,
+        name: str,
+        county_council: int,
+        leg_dist: int,
+        cong_dist: int,
+        seattle_council_dist: int,
+        poly: Polygon,
+    ):
         self.code = code
         self.name = name
         self.county_council = county_council
@@ -40,7 +41,7 @@ class Precinct(object):
 
     def get_poly(self) -> Polygon:
         return self.poly
-    
+
     def __str__(self):
         return f"""CODE: { self.get_code() },
             NAME: { self.get_name() },
