@@ -91,7 +91,6 @@ class Drafter:
         num_values = len(candidates[0]['values'])
         num_candidates = len(candidates)
         scalar = math.floor(num_values / num_candidates)
-        print(RATING_RANGE / num_values)
         if scalar > MAX_SCALAR:
             scalar = MAX_SCALAR
         return RATING_RANGE / num_values + 0.05, math.floor(scalar * num_candidates * 0.5)

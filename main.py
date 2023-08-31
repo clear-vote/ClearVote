@@ -1,8 +1,9 @@
 import json
 import datetime
 from Judging.drafter import Drafter
-
+from Judging.extractor import Extractor
 from Mapping.mapper import Mapper
+import os
 
 def get_values(file_path, contest_type):
     with open(file_path, 'r') as f:
@@ -13,7 +14,6 @@ def get_values(file_path, contest_type):
             return value_set["values"]
 
 if __name__ == '__main__':
-    
 
     # TODO: Create a basic front-end for all of this
     # TODO: STRETCH Address input validation -> (eg. confirm the address is in the municipality SEATTLE and the state WA)
