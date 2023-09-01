@@ -4,7 +4,7 @@ import io
 
 '''
 TODO: extract and isolate voter statements from manually inputted voter pamphlet pdfs
-TODO: Fix the "Rosie McCarter" problem
+TODO: Fix the "Rosie McCarter" problem (ask Joey lol)
 '''
 class Extractor:
     def download_pdf(url):

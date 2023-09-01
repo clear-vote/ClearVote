@@ -95,13 +95,13 @@ class Drafter:
             scalar = MAX_SCALAR
         return RATING_RANGE / num_values + 0.05, math.floor(scalar * num_candidates * 0.5)
 
-    def print_election_data(election_data):
+    def print_contest_data(election, precinct):
         # Constants for filtering
 
         # Extract the data and apply the draft_values function to each district
-        for election in election_data["elections"]:
-            for contest in election["contests"]:
-                for district in contest["districts"]:
+        for contest in election["contests"]:
+            for district in contest["districts"]:
+                if contest["contest_type"] == "city_council" and precinct.get_seattle_council_dist() == district['position_number'] or contest["contest_type"] == "port_commissioner":
                     candidates = district["candidates"]
                     
                     for candidate in candidates:
@@ -117,8 +117,9 @@ class Drafter:
                     # Apply the draft
                     result = Drafter._draft_values(candidates)
                     
-                    print(contest['contest_type'], f"District {district['district_number']}")
+                    print(contest['contest_type'], f"position {district['position_number']}")
                     for name, values in result.items():
                         print(f"  {name}:")
                         for value in values:
                             print(f"    - {value}")
+                    print("\n")
