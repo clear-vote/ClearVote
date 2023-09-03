@@ -1,6 +1,4 @@
-import typing
 from shapely import Polygon
-
 
 class Precinct(object):
     def __init__(
