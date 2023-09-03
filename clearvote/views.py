@@ -1,8 +1,8 @@
 from clearvote import app
 from flask import render_template, url_for, redirect
 from clearvote.forms import AddressForm
-from clearvote.utils.Mapping.mapper import Mapper
-from clearvote.utils.Mapping.precinct import Precinct
+from clearvote.utils.mapping.mapper import Mapper
+from clearvote.utils.data.precinct import Precinct
 from urllib.parse import unquote
 
 @app.route("/")
@@ -18,5 +18,6 @@ def address_lookup():
 
 @app.route("/address/<address>")
 def address_info(address):
-    p = Mapper.get_precinct(address)
+    m = Mapper()
+    p = m.get_precinct(address)
     return render_template("address_info.html", address=address, precinct=p)
