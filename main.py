@@ -1,7 +1,7 @@
 import json
 import datetime
 from clearvote.utils.Judging.drafter import Drafter
-from clearvote.utils.Mapping.mapper import Mapper
+from clearvote.utils.mapping.mapper import Mapper
 
 def get_values(file_path, contest_type):
     with open(file_path, 'r') as f:
