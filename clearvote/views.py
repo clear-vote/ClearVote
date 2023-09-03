@@ -18,6 +18,9 @@ def address_lookup():
 
 @app.route("/address/<address>")
 def address_info(address):
-    m = Mapper()
-    p = m.get_precinct(address)
-    return render_template("address_info.html", address=address, precinct=p)
+    mapper = Mapper()
+    try:
+        precinct = mapper.get_precinct(address)
+    except ValueError:
+        return f"{ address } is not in a known precinct"
+    return render_template("address_info.html", address=address, precinct=precinct)
