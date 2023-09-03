@@ -8,7 +8,7 @@ class Precinct(object):
         county_council: int,
         leg_dist: int,
         cong_dist: int,
-        seattle_council_dist: int,
+        city_council_dist: int,
         poly: Polygon,
     ):
         self.code = code
@@ -16,7 +16,7 @@ class Precinct(object):
         self.county_council = county_council
         self.leg_dist = leg_dist
         self.cong_dist = cong_dist
-        self.seattle_council_dist = seattle_council_dist
+        self.city_council_dist = city_council_dist
         self.poly = poly
 
     def get_code(self) -> int:
@@ -34,8 +34,8 @@ class Precinct(object):
     def get_cong_dist(self) -> int:
         return self.cong_dist
 
-    def get_seattle_council_dist(self) -> int:
-        return self.seattle_council_dist
+    def get_city_council_dist(self) -> int:
+        return self.city_council_dist
 
     def get_poly(self) -> Polygon:
         return self.poly
@@ -46,5 +46,5 @@ class Precinct(object):
             COUNTY COUNCIL: { self.get_county_council() },
             LEG. DIST: { self.get_leg_dist() },
             CONG. DIST: { self.get_cong_dist() },
-            SEATTLE COUNCIL DIST: { self.get_seattle_council_dist() }
+            CITY COUNCIL DIST: { self.get_city_council_dist() }
             """

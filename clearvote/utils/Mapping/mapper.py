@@ -5,8 +5,8 @@ from shapely.geometry import Point
 # import geopandas
 # import pandas as pd
 import requests
-from data.data_loader import PrecinctLoader
-from data.precinct import Precinct
+from clearvote.utils.data.data_loader import PrecinctLoader
+from clearvote.utils.data.precinct import Precinct
 
 # 2d binary search of points - at each stage, look at points, divide vertically, go until smallest bounding box can be reached
 # reduction algo: state --> county --> precinct
@@ -70,7 +70,7 @@ class Mapper:
             county_council=geo_row["county_council_code"],
             leg_dist=geo_row["leg_dist_code"],
             cong_dist=geo_row["cong_dist_code"],
-            seattle_council_dist=geo_row["city_council_dist_code"],
+            city_council_dist=geo_row["city_council_dist_code"],
             poly=geo_row["shape"],
         )
         return precinct
