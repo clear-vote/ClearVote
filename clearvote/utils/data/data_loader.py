@@ -1,7 +1,7 @@
 """This module is used to load the precinct data table into memory."""
 from pathlib import Path
 import pandas as pd
-from preprocessing.precinct_parser import Parser
+from clearvote.utils.preprocessing.precinct_parser import Parser
 
 class PrecinctLoader:
     """This class contains methods to load the precinct data"""
