@@ -26,7 +26,6 @@ class PrecinctLoader:
         """
 
         filepath = Path.joinpath(Path(__file__).parent, "cached_data/precinct_table.pkl") # filepath for binary data file
-        print(filepath.resolve())
         if not filepath.exists():
             data_table = Parser.parse_precinct_table()
             data_table.to_pickle(filepath)
