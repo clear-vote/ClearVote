@@ -2,6 +2,7 @@
 import json
 from urllib.parse import quote
 from shapely.geometry import Point
+
 # import geopandas
 # import pandas as pd
 import requests
@@ -17,6 +18,7 @@ from clearvote.utils.data.precinct import Precinct
 
 class Mapper:
     """This class contains methods to map addresses and coordinates to their precinct data."""
+
     # a pandas dataframe where each entry corresponds to a single precinct
     _precinct_table = PrecinctLoader.load_data()
 
@@ -25,30 +27,32 @@ class Mapper:
 
         Args:
             address: address to find coordinates for.
-        
+
         Returns:
             latitude/longitude coordinates for the given address as a Point.
         """
         url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{ quote(address) }.json?access_token=pk.eyJ1IjoiYW5heWFwIiwiYSI6ImNrcTFndGM0NTAzcWIycHBpZHhoenUxeWIifQ.2IvOWRA9LYQlxBk9j7_WaQ"
         try:
             response = requests.get(url, timeout=10)
+            response_json = json.loads(response.content)
+            coord = response_json["features"][0]["center"]
+
+            if not response.ok:
+                raise ValueError(
+                    f"Invalid response from MapBox. Error Code: { response.status_code }"
+                )
+
+            return Point(coord[0], coord[1])
         except requests.exceptions.Timeout:
             print("Request timed out")
         except requests.exceptions.RequestException as exc:
             print("An error occurred:", exc)
 
-        if not response.ok:
-            raise ValueError(f"Invalid response from MapBox. Error Code: { response.status_code }")
-
-        response_json = json.loads(response.content)
-        coord = response_json["features"][0]["center"]
-        return Point(coord[0], coord[1])
-
     def _get_precinct(
         self, coord: Point
     ) -> Precinct:  # get precinct for given coordinates
         """Returns a Precinct object containing data about the precinct at the given coordinates.
-        
+
         Args:
             coord: a latitude/longitude positional coordinate
         Returns:
@@ -61,7 +65,9 @@ class Mapper:
         ]
 
         if len(geo_rows) == 0:
-            raise ValueError(f"Given coordinates ({ str(coord) }) do not map to a known precinct.")
+            raise ValueError(
+                f"Given coordinates ({ str(coord) }) do not map to a known precinct."
+            )
 
         geo_row = geo_rows.iloc[0]
         precinct = Precinct(
@@ -79,7 +85,7 @@ class Mapper:
         """Returns a Precinct object containing data about the precinct at the given address.
         Args:
             address: address to look up precinct for.
-        
+
         Returns:
             Precinct object containing data about the precinct at the given address.
 
