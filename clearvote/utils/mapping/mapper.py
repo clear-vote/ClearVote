@@ -1,4 +1,5 @@
 """This module is used to map addresses and coordinates to their precinct data."""
+import os
 import json
 from urllib.parse import quote
 from shapely.geometry import Point
@@ -12,8 +13,6 @@ from clearvote.utils.data.precinct import Precinct
 # 2d binary search of points - at each stage, look at points, divide vertically, go until smallest bounding box can be reached
 # reduction algo: state --> county --> precinct
 # look into python interfaces
-# separate data loader into another file
-# instead of csv every time, it should be pickled and stored/read into memory as bin.
 
 
 class Mapper:
@@ -30,23 +29,37 @@ class Mapper:
 
         Returns:
             latitude/longitude coordinates for the given address as a Point.
+
+        Raises:
+            RuntimeError: if issue connecting to or getting valid response from MapBox
         """
-        url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{ quote(address) }.json?access_token=pk.eyJ1IjoiYW5heWFwIiwiYSI6ImNrcTFndGM0NTAzcWIycHBpZHhoenUxeWIifQ.2IvOWRA9LYQlxBk9j7_WaQ"
+
+        mapbox_token = os.environ.get("MAPBOX_ACCESS_TOKEN")
+        # if local mapbox access token, use that; else use public access token
+        if mapbox_token is None:
+            mapbox_token = "pk.eyJ1IjoiYW5heWFwIiwiYSI6ImNrcTFndGM0NTAzcWIycHBpZHhoenUxeWIifQ.2IvOWRA9LYQlxBk9j7_WaQ"
+
+        url = (
+            f"https://api.mapbox.com/geocoding/v5/mapbox.places/{ quote(address) }.json"
+            + f"?access_token={ mapbox_token }"
+        )
         try:
             response = requests.get(url, timeout=10)
             response_json = json.loads(response.content)
             coord = response_json["features"][0]["center"]
 
             if not response.ok:
-                raise ValueError(
+                raise RuntimeError(
                     f"Invalid response from MapBox. Error Code: { response.status_code }"
                 )
 
             return Point(coord[0], coord[1])
-        except requests.exceptions.Timeout:
-            print("Request timed out")
+        except requests.exceptions.ConnectionError as exc:
+            raise RuntimeError("Could not connect.") from exc
+        except requests.exceptions.Timeout as exc:
+            raise RuntimeError("Request timed out.") from exc
         except requests.exceptions.RequestException as exc:
-            print("An error occurred:", exc)
+            raise RuntimeError(f"An error occurred: {exc}") from exc
 
     def _get_precinct(
         self, coord: Point
