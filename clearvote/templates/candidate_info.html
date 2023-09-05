@@ -15,11 +15,11 @@
                     {% for candidate in district.candidates %}
                         <div class="col">
                             <h5>{{ candidate.name.replace('_', ' ') }}</h5>
-                            <ul>
+                            <ol>
                                 {% for issue in candidate.issues|sort(attribute='1', reverse=true) %}
                                     <li>{{ issue[0] }}</li>
                                 {% endfor %}
-                            </ul>
+                            </ol>
                         </div>
                     {% endfor %}
                 </div>

@@ -1,8 +1,8 @@
 import json
 import datetime
-from Judging.drafter import Drafter
+from judging.drafter import Drafter
 
-from Mapping.mapper import Mapper
+from mapping.mapper import Mapper
 
 def get_values(file_path, contest_type):
     with open(file_path, 'r') as f:
