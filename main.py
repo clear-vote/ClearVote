@@ -1,10 +1,8 @@
 import json
 import datetime
 from Judging.drafter import Drafter
-from Judging.pamphlet_extractor import Extractor
+
 from Mapping.mapper import Mapper
-import os
-from Judging.analyzer import Analyzer
 
 def get_values(file_path, contest_type):
     with open(file_path, 'r') as f:

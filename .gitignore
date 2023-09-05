@@ -159,5 +159,11 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# VS Code config
+.vscode
+
 # Jupyter Notebooks
 *.ipynb
+
+# Mac File system metadata
+.DS_Store
