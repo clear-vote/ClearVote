@@ -16,7 +16,7 @@
                             "candidates": [
                                 {
                                     "name": "Jean_Iannelli_Craciun",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -73,7 +73,7 @@
                                 },
                                 {
                                     "name": "Lucy_Barefoot",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -130,7 +130,7 @@
                                 },
                                 {
                                     "name": "Maren_Costa",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -187,7 +187,7 @@
                                 },
                                 {
                                     "name": "Mia_Jacobson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             0
@@ -244,7 +244,7 @@
                                 },
                                 {
                                     "name": "Phil_Tavel",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -301,7 +301,7 @@
                                 },
                                 {
                                     "name": "Preston_Anderson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -358,7 +358,7 @@
                                 },
                                 {
                                     "name": "Rob_Saka",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -415,7 +415,7 @@
                                 },
                                 {
                                     "name": "Stephen_Brown",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -477,7 +477,7 @@
                             "candidates": [
                                 {
                                     "name": "Margaret_Elisabeth",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -534,7 +534,7 @@
                                 },
                                 {
                                     "name": "Tammy_J_Morales",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -591,7 +591,7 @@
                                 },
                                 {
                                     "name": "Tanya_Woo",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -653,7 +653,7 @@
                             "candidates": [
                                 {
                                     "name": "Alex_Cooley",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -710,7 +710,7 @@
                                 },
                                 {
                                     "name": "Alex_Hudson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -767,7 +767,7 @@
                                 },
                                 {
                                     "name": "Andrew_Ashiofu",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -824,7 +824,7 @@
                                 },
                                 {
                                     "name": "Bobby_Goodwin",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -881,7 +881,7 @@
                                 },
                                 {
                                     "name": "Efrain_Hudnell",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -938,7 +938,7 @@
                                 },
                                 {
                                     "name": "Joy_Hollingsworth",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -995,7 +995,7 @@
                                 },
                                 {
                                     "name": "Ry_Armstrong",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -1052,7 +1052,7 @@
                                 },
                                 {
                                     "name": "Shobhit_Agarwal",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1114,7 +1114,7 @@
                             "candidates": [
                                 {
                                     "name": "George_Artem",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1171,7 +1171,7 @@
                                 },
                                 {
                                     "name": "Ken_Wilson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1228,7 +1228,7 @@
                                 },
                                 {
                                     "name": "Maritza_Rivera",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1285,7 +1285,7 @@
                                 },
                                 {
                                     "name": "Ron_Davis",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1347,7 +1347,7 @@
                             "candidates": [
                                 {
                                     "name": "Bobby_J_Tucker",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1404,7 +1404,7 @@
                                 },
                                 {
                                     "name": "Boegart_Bibby",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             0
@@ -1461,7 +1461,7 @@
                                 },
                                 {
                                     "name": "Cathy_Moore",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1518,7 +1518,7 @@
                                 },
                                 {
                                     "name": "ChrisTiana_ObeySumner",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1575,7 +1575,7 @@
                                 },
                                 {
                                     "name": "Justin_Simmons",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1632,7 +1632,7 @@
                                 },
                                 {
                                     "name": "Lucca_Murdoch_Howard",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1689,7 +1689,7 @@
                                 },
                                 {
                                     "name": "Nilu_Jenks",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -1746,7 +1746,7 @@
                                 },
                                 {
                                     "name": "Rebecca_Williamson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1803,7 +1803,7 @@
                                 },
                                 {
                                     "name": "Shane_Macomber",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -1860,7 +1860,7 @@
                                 },
                                 {
                                     "name": "Tye_Reed",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -1922,7 +1922,7 @@
                             "candidates": [
                                 {
                                     "name": "Dale_Kutzera",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             90
@@ -1979,7 +1979,7 @@
                                 },
                                 {
                                     "name": "Dan_Strauss",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -2036,7 +2036,7 @@
                                 },
                                 {
                                     "name": "Jon_Lisbin",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -2093,7 +2093,7 @@
                                 },
                                 {
                                     "name": "Pete_Hanning",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -2150,7 +2150,7 @@
                                 },
                                 {
                                     "name": "Shea_Wilson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             0
@@ -2207,7 +2207,7 @@
                                 },
                                 {
                                     "name": "Victoria_Palmer",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -2269,7 +2269,7 @@
                             "candidates": [
                                 {
                                     "name": "Aaron_Marshall",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -2326,7 +2326,7 @@
                                 },
                                 {
                                     "name": "Andrew_J_Lewis",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -2383,7 +2383,7 @@
                                 },
                                 {
                                     "name": "Bob_Kettle",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -2440,7 +2440,7 @@
                                 },
                                 {
                                     "name": "Isabelle_Kerner",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -2497,7 +2497,7 @@
                                 },
                                 {
                                     "name": "Olga_Sagan",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             70
@@ -2554,7 +2554,7 @@
                                 },
                                 {
                                     "name": "Wade_Sowders",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Wellbeing",
                                             80
@@ -2621,7 +2621,7 @@
                             "candidates": [
                                 {
                                     "name": "Fred_Felleman",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Operations",
                                             70
@@ -2662,7 +2662,7 @@
                                 },
                                 {
                                     "name": "Jesse_Tam",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Operations",
                                             30
@@ -2703,7 +2703,7 @@
                                 },
                                 {
                                     "name": "Todd_Curtis",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Operations",
                                             80
@@ -2754,7 +2754,7 @@
                             "candidates": [
                                 {
                                     "name": "Blaine_Parce",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             20
@@ -2803,7 +2803,7 @@
                                 },
                                 {
                                     "name": "Debbie_Carlsen",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             70
@@ -2852,7 +2852,7 @@
                                 },
                                 {
                                     "name": "Liza_Rankin",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             70
@@ -2901,7 +2901,7 @@
                                 },
                                 {
                                     "name": "Michael_Christophersen",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             0
@@ -2955,7 +2955,7 @@
                             "candidates": [
                                 {
                                     "name": "Ben_Gitenstein",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             40
@@ -3004,7 +3004,7 @@
                                 },
                                 {
                                     "name": "Christie_Robertson",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             60
@@ -3053,7 +3053,7 @@
                                 },
                                 {
                                     "name": "Evan_Briggs",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             60
@@ -3107,7 +3107,7 @@
                             "candidates": [
                                 {
                                     "name": "Gina_Topp",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             0
@@ -3156,7 +3156,7 @@
                                 },
                                 {
                                     "name": "Maryanne_Wood",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             20
@@ -3205,7 +3205,7 @@
                                 },
                                 {
                                     "name": "Rosie_McCarter",
-                                    "values": [
+                                    "issues": [
                                         [
                                             "Academics",
                                             60
