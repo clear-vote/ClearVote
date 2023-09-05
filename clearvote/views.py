@@ -5,8 +5,6 @@ from clearvote.utils.mapping.mapper import Mapper
 from clearvote.utils.data.precinct import Precinct
 from clearvote.utils.judging.drafter import Drafter
 from urllib.parse import unquote
-import json
-
 
 @app.route("/")
 def index():
