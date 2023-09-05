@@ -2,9 +2,13 @@
 
 {% block content %}
     <div>
-        <h1>Tell us where you live</h1>
+        <h1>Welcome to ClearVote!</h1>
+        <p>Our goal is to help the public stay up-to-date in off-cycle elections and understand who they are voting for</p>
     </div>
     <div>
+        <p>To get started, please enter your address</p>
+        <!--TODO: "why do you need my address?"-->
+        <!--TODO: validate address before moving on-->
         <form action="/address" method='post' >
             {{ form.hidden_tag() }}
             <p>

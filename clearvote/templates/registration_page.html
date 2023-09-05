@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <!--TODO: The most recent election in your area is...-->
+        <p>Are you registered to vote? (or have you moved recently)?</p>
+    </div>
+    <div>
+      <form action="/address/{{ address }}" method="get">
+        <input type="submit" value="Yes"/>
+      </form>
+      
+      <button onclick="window.open('https://voter.votewa.gov/WhereToVote.aspx', '_blank')">No</button>
+    </div>
+{% endblock %}
