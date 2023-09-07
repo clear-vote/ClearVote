@@ -86,9 +86,19 @@ class KingCountyDistrictsParser:
             raise RuntimeError(f"An error occurred: {exc}") from exc
 
     @staticmethod
-    def get_tables(rename_map: Dict[str, str] = {}) -> Dict[str, gpd.GeoDataFrame]:
+    def get_tables(
+        rename_map: Dict[str, str] = {
+            "NAME": "name",
+            "LEGDST": "name",
+            "CONGDST": "name",
+            "kccdst": "name",
+            "geometry": "shape",
+        }
+    ) -> Dict[str, gpd.GeoDataFrame]:
         """Gets the tables of geographic district data in the form of a dictionary keyed by the name of the district type.
 
+        Args:
+            rename_map: a map of old column names to new column names
         Returns:
             A dictionary mapping distict types by name to geopandas GeoDataFrame with all geo data for that type.
         Raises:
