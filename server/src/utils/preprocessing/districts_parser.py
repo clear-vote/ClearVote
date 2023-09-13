@@ -39,7 +39,8 @@ class KingCountyDistrictsParser:
         """Gets geographical data from the given url.
 
         Args:
-            data_url: url to query for geo data. Must return data in GeoJSON form via HTTP GET request.
+            data_req: request used to query for geo data. Must return data in GeoJSON form via
+                HTTP GET request.
         Returns:
             A geopandas GeoDataGrame containing a 'geometry' column and other data.
         """
@@ -95,12 +96,14 @@ class KingCountyDistrictsParser:
             "geometry": "shape",
         }
     ) -> Dict[str, gpd.GeoDataFrame]:
-        """Gets the tables of geographic district data in the form of a dictionary keyed by the name of the district type.
+        """Gets the tables of geographic district data in the form of a dictionary keyed by the
+            name of the district type.
 
         Args:
             rename_map: a map of old column names to new column names
         Returns:
-            A dictionary mapping distict types by name to geopandas GeoDataFrame with all geo data for that type.
+            A dictionary mapping distict types by name to geopandas GeoDataFrame with all
+                geo data for that type.
         Raises:
             RuntimeError: if connection failed or invalid response from the KingCo GIS service.
         """
@@ -151,51 +154,13 @@ class KingCountyDistrictsParser:
         precinct_table.rename(columns=rename_map, inplace=True)
         precinct_table.set_index("precinct_code", inplace=True, drop=False)
         return precinct_table
-
-    @staticmethod
-    def _get_container(
-        shape: Polygon or MultiPolygon,
-        boundaries: gpd.GeoDataFrame,
-        shape_name: str = "",
-    ) -> gpd.GeoDataFrame:
-        """Returns the row from boundaries that contains the given shape.
-
-        Args:
-            shape: polygon or multipolygon to check containment of
-            boundaries: a geopandas GeoDataFrame with at least a 'name' and 'shape' column
-        Returns:
-            The row from boundaries that contains the given shape. None if no such boundaries
-        Raises:
-            ValueError: if multiple boundaries contain shape.
-        """
-        container = boundaries.loc[boundaries["shape"].contains(shape)]
-        if len(container) == 0:
-            return None
-        if len(container) > 1:
-            raise ValueError(
-                f"Multiple containing boundaries found for { shape_name }:\n{ container['name'] }"
-            )
-        return container.iloc[0]
-
-    @staticmethod
-    def get_containing_districts(
-        precincts_table: gpd.GeoDataFrame, district_table: gpd.GeoDataFrame
-    ) -> pd.Series:
-        """Returns a series"""
-        containing_districts = precincts_table.apply(
-            lambda row: KingCountyDistrictsParser._get_container(
-                row["shape"], district_table, row
-            ),
-            axis=1
-        )
-        return containing_districts
     
     @staticmethod
     def _validate_boundary_results(
         results: gpd.GeoDataFrame
     ):
         if len(results) == 0:
-            return gpd.GeoSeries({"name": None, "geometry": None})
+            return gpd.GeoSeries({col: None for col in results.columns})
         elif len(results) > 1:
             raise RuntimeError("Multiple boundaries contain the center.")
         return results.iloc[0]
@@ -205,6 +170,17 @@ class KingCountyDistrictsParser:
         shape: Polygon or MultiPolygon,
         boundaries: gpd.GeoDataFrame
     ) -> gpd.GeoSeries:
+        """Gets the row from the list of boundaries that contains the center of the given shape.
+        
+        Args:
+            shape: shape to check for containment within the boundaries.
+            boundaries: a geopandas dataframe with at least a 'name' and 'geometry' column.
+        Returns:
+            A GeoSeries of the row with geometry that contains the center of shape.
+        Raises:
+            ValueError: if shape is not an instance of shapely Polygon or Multipolygon.
+            RuntimeError: if multiple boundaries contain the center of shape.
+        """
         if isinstance(shape, Polygon):
             center = shape.centroid
             containing = boundaries.loc[boundaries.contains(center)]
@@ -215,7 +191,7 @@ class KingCountyDistrictsParser:
                 center = poly.centroid
                 containing = boundaries.loc[boundaries.contains(center)]
                 validated = KingCountyDistrictsParser._validate_boundary_results(containing)
-                # if prev and not validated.name == prev.name:
+                # if prev and not validated.name == prev.name: TODO fix this so it checks for same boundary
                 #     raise RuntimeError(f"given shape falls in both { prev.name } and { validated.name }")
                 prev = validated
             return prev
@@ -224,15 +200,32 @@ class KingCountyDistrictsParser:
 
     @staticmethod
     def get_boundaries_by_center(
-        precincts_table: gpd.GeoDataFrame,
+        precinct_table: gpd.GeoDataFrame,
         district_table: gpd.GeoDataFrame
     ) -> gpd.GeoDataFrame:
-        return precincts_table.apply(
+        """Returns a DataFrame of precincts codes and the information about the district that
+            contains it.
+        
+        Args:
+            precinct_table: a geopandas GeoDataFrame containing at least the columns 'precinct_code'
+                and 'geometry'. 'geometry' must contain shapely Polygons or MultiPolygons.
+                'precinct_code' should be the index column of this dataframe.
+            district_table: a geopandas GeoDataFrame containing district boundary data. must be
+                indexed by a 'name' column and contain a 'geometry' column. 'geometry' must contain
+                shapely Polygons or MultiPolygons.
+        Returns:
+            A geopandas GeoDataFrame with the following columns:
+                - precinct_code: a unique code correponding to a precinct in King County
+                - name: name of the district that contains the center of this precinct
+        Raises:
+            ValueError: if the shape of any precinct is not an instance of shapely Polygon
+                or Multipolygon.
+            RuntimeError: if multiple boundaries contain the center of a precinct.
+        """
+        return precinct_table.apply(
             lambda row: KingCountyDistrictsParser.get_boundary(row["geometry"], district_table),
             axis=1
         )
-        # lambda row: print(type(row), row)
-        # , KingCountyDistrictsParser.get_boundary(row["geometry"], district_table
 
     @staticmethod
     def fill_all_containing_districts(
@@ -240,9 +233,27 @@ class KingCountyDistrictsParser:
         district_tables: Dict[str, gpd.GeoDataFrame],
         ignore: Set[str] = set(),
     ) -> gpd.GeoDataFrame:
+        """Returns a GeoDataFrame that is a left spatial join of the precinct table and each
+            district table.
+            
+        Args:
+            precinct_table: table of precinct information. must be indexed by a 'precinct_code'
+                column and contain the column 'geometry'.
+            district_table: a dictionary mapping district type names to tables containing
+                information about them. each table must be indexed by a 'name' column and contain a
+                'geometry' column.
+            ignore: a set of table names to ignore for joining. must be names that are keys in
+                district_tables.
+        Returns:
+            A GeoDataFrame that is a left spatial join of the precinct table and each
+                district table. In the returned dataframe, the 'name' and 'geometry' column names
+                of each district that is joined will be prefixed with the district type name in
+                snake case. E.g., 'School districts' would be turned into the prefix 'school_districts_'
+        Raisese:
+            ValueError: if the shape of any precinct is not an instance of shapely Polygon or Multipolygon.
+            RuntimeError: if multiple boundaries for a district type contain the center of a precinct."""
         result = precinct_table
         for name, district_table in district_tables.items():
-            print(name)
             if name not in ignore:
                 formatted_name = name.lower().replace(" ", "_")
                 precinct_districts = KingCountyDistrictsParser.get_boundaries_by_center(precinct_table, district_table)
