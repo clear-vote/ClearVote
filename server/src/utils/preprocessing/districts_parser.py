@@ -149,6 +149,7 @@ class KingCountyDistrictsParser:
 
         precinct_table = pd.concat(precinct_table_parts)
         precinct_table.rename(columns=rename_map, inplace=True)
+        precinct_table.set_index("precinct_code", inplace=True, drop=False)
         return precinct_table
 
     @staticmethod
@@ -188,18 +189,65 @@ class KingCountyDistrictsParser:
             axis=1
         )
         return containing_districts
+    
+    @staticmethod
+    def _validate_boundary_results(
+        results: gpd.GeoDataFrame
+    ):
+        if len(results) == 0:
+            return gpd.GeoSeries({"name": None, "geometry": None})
+        elif len(results) > 1:
+            raise RuntimeError("Multiple boundaries contain the center.")
+        return results.iloc[0]
+
+    @staticmethod
+    def get_boundary(
+        shape: Polygon or MultiPolygon,
+        boundaries: gpd.GeoDataFrame
+    ) -> gpd.GeoSeries:
+        if isinstance(shape, Polygon):
+            center = shape.centroid
+            containing = boundaries.loc[boundaries.contains(center)]
+            return KingCountyDistrictsParser._validate_boundary_results(containing)
+        elif isinstance(shape, MultiPolygon):
+            prev = None
+            for poly in shape.geoms:
+                center = poly.centroid
+                containing = boundaries.loc[boundaries.contains(center)]
+                validated = KingCountyDistrictsParser._validate_boundary_results(containing)
+                # if prev and not validated.name == prev.name:
+                #     raise RuntimeError(f"given shape falls in both { prev.name } and { validated.name }")
+                prev = validated
+            return prev
+        else:
+            raise ValueError(f"shape type { type(shape) } is not valid.")
+
+    @staticmethod
+    def get_boundaries_by_center(
+        precincts_table: gpd.GeoDataFrame,
+        district_table: gpd.GeoDataFrame
+    ) -> gpd.GeoDataFrame:
+        return precincts_table.apply(
+            lambda row: KingCountyDistrictsParser.get_boundary(row["geometry"], district_table),
+            axis=1
+        )
+        # lambda row: print(type(row), row)
+        # , KingCountyDistrictsParser.get_boundary(row["geometry"], district_table
 
     @staticmethod
     def fill_all_containing_districts(
-        precincts_table: gpd.GeoDataFrame,
+        precinct_table: gpd.GeoDataFrame,
         district_tables: Dict[str, gpd.GeoDataFrame],
         ignore: Set[str] = set(),
-    ) -> None:
+    ) -> gpd.GeoDataFrame:
+        result = precinct_table
         for name, district_table in district_tables.items():
+            print(name)
             if name not in ignore:
                 formatted_name = name.lower().replace(" ", "_")
-                precincts_table[
-                    formatted_name
-                ] = KingCountyDistrictsParser.get_containing_districts(
-                    precincts_table, district_table
-                )
+                precinct_districts = KingCountyDistrictsParser.get_boundaries_by_center(precinct_table, district_table)
+                print(type(precinct_districts))
+                precinct_districts = precinct_districts.add_prefix(f"{ formatted_name }_")
+
+                result = pd.merge(result, precinct_districts, how="left", left_index=True, right_index=True, validate="1:1")
+        return result
