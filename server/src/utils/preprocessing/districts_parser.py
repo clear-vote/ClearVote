@@ -4,6 +4,7 @@ from typing import Dict, Set
 import requests
 import pandas as pd
 import geopandas as gpd
+from requests import Request, Session
 from requests.models import PreparedRequest
 from shapely import Polygon, MultiPolygon
 
@@ -14,6 +15,8 @@ class KingCountyDistrictsParser:
     # max number of records that can be obtained in a single query from KingCo ArcGIS server
     MAX_RECORD_COUNT = 1000
 
+    session = Session()
+
     @staticmethod
     def _get_tables_info() -> pd.DataFrame:
         """Gets information on what tables are available from KingCo GIS service.
@@ -23,19 +26,18 @@ class KingCountyDistrictsParser:
             - id (index): id of the layer/district type
             - name: name of the layer/district type
         """
-        data_req = PreparedRequest()
-        data_req.prepare_url(
-            "https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer",
-            {"f": "pjson"}
-        )
-        json_table_info = KingCountyDistrictsParser._as_json(data_req.url)
+        data_req = Request(
+            url="https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer",
+            params={"f": "pjson"}
+            )
+        json_table_info = KingCountyDistrictsParser._as_json(data_req)
         data = json.loads(json_table_info)
         table_info = pd.DataFrame.from_dict(data["layers"])
         table_info.set_index("id", inplace=True)
         return table_info
 
     @staticmethod
-    def _get_geo_table(data_req: PreparedRequest) -> gpd.GeoDataFrame:
+    def _get_geo_table(data_req: Request) -> gpd.GeoDataFrame:
         """Gets geographical data from the given url.
 
         Args:
@@ -48,8 +50,8 @@ class KingCountyDistrictsParser:
         table_parts = []
 
         while True:
-            data_req.prepare_url(data_req.url, params={"resultOffset" : result_offset})
-            json_data = KingCountyDistrictsParser._as_json(data_req.url)
+            data_req.params["resultOffset"] = result_offset            
+            json_data = KingCountyDistrictsParser._as_json(data_req)
             if len(json_data) == 0:
                 break
             data = json.loads(json_data)
@@ -62,19 +64,19 @@ class KingCountyDistrictsParser:
 
     @staticmethod
     def _as_json(
-        data_url: str
+        data_req: Request
     ) -> bytes:
         """Queries the given url and returns the json data resulting from its response.
 
         Args:
-            data_url: the url to GET from (must be an endpoint returning json/GeoJSON data).
+            data_req: the request to prepare and GET from (must be an endpoint returning json/GeoJSON data).
         Returns:
             JSON data from the given url in bytes form.
         Raises:
             RuntimeError: if connection failed or invalid response from the given url.
         """
         try:
-            data_response = requests.get(data_url, timeout=10)
+            data_response = requests.get(data_req.prepare(), timeout=10)
             if not data_response.ok:
                 raise RuntimeError("Invalid response from server.")
             json_data = data_response.content
@@ -93,7 +95,6 @@ class KingCountyDistrictsParser:
             "LEGDST": "name",
             "CONGDST": "name",
             "kccdst": "name",
-            "geometry": "shape",
         }
     ) -> Dict[str, gpd.GeoDataFrame]:
         """Gets the tables of geographic district data in the form of a dictionary keyed by the
@@ -111,9 +112,28 @@ class KingCountyDistrictsParser:
         tables = {}
         for layer_id, row in table_info.iterrows():
             layer_name = row["name"]
-            # data_url = f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson"
-            data_url = f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query?where=1%3D1&timeRelation=esriTimeRelationOverlaps&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&units=esriSRUnit_Foot&returnGeometry=true&returnTrueCurves=false&returnIdsOnly=false&returnCountOnly=false&returnZ=false&returnM=false&returnDistinctValues=false&returnExtentOnly=false&sqlFormat=none&featureEncoding=esriDefault&f=geojson"
-            layer_table = KingCountyDistrictsParser._get_geo_table(data_url)
+            data_req = Request(
+                url = f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query",
+                params={
+                    "where": "1=1",
+                    "timeRelation": "esriTimeRelationOverlaps",
+                    "geometryType": "esriGeometryEnvelope",
+                    "spatialRel": "esriSpatialRelIntersects",
+                    "units": "esriSRUnit_Foot",
+                    "returnGeometry": "true",
+                    "returnTrueCurves": "false",
+                    "returnIdsOnly": "false",
+                    "returnCountOnly": "false",
+                    "returnZ": "false",
+                    "returnM": "false",
+                    "returnDistinctValues": "false",
+                    "returnExtentOnly": "false",
+                    "sqlFormat": "none",
+                    "featureEncoding": "esriDefault",
+                    "f": "geojson"
+                }
+            )
+            layer_table = KingCountyDistrictsParser._get_geo_table(data_req)
             layer_table.rename(columns=rename_map, inplace=True)
             tables[layer_name] = layer_table
 
@@ -124,7 +144,6 @@ class KingCountyDistrictsParser:
         rename_map: Dict[str, str] = {
             "votdst": "precinct_code",
             "NAME": "precinct_name",
-            "geometry": "shape",
             "SUM_VOTERS": "num_voters",
             "Shape_Length": "shape_length",
             "Shape_Area": "shape_area",
@@ -137,20 +156,17 @@ class KingCountyDistrictsParser:
         Returns:
             A geopandas GeoDataFrame containing full KingCo precinct data.
         """
-        base_url = "https://gisdata.kingcounty.gov/arcgis/rest/services/OpenDataPortal/district__votdst_area/MapServer/418/query?outFields=*&where=1%3D1&f=geojson"
-        result_offset = 0
-        precinct_table_parts = []
+        base_url = "https://gisdata.kingcounty.gov/arcgis/rest/services/OpenDataPortal/district__votdst_area/MapServer/418/query"
 
-        while True:
-            new_data = KingCountyDistrictsParser._get_geo_table(
-                f"{ base_url }&resultOffset={ result_offset }"
-            )
-            if len(new_data) == 0:
-                break
-            precinct_table_parts.append(new_data)
-            result_offset += KingCountyDistrictsParser.MAX_RECORD_COUNT
-
-        precinct_table = pd.concat(precinct_table_parts)
+        base_req = Request(
+            url=base_url,
+            params={
+                "outFields": "*",
+                "where": "1=1",
+                "f": "geojson"
+            }
+        )
+        precinct_table = KingCountyDistrictsParser._get_geo_table(base_req)
         precinct_table.rename(columns=rename_map, inplace=True)
         precinct_table.set_index("precinct_code", inplace=True, drop=False)
         return precinct_table
@@ -197,6 +213,22 @@ class KingCountyDistrictsParser:
             return prev
         else:
             raise ValueError(f"shape type { type(shape) } is not valid.")
+
+    @staticmethod
+    def _get_intersecting_row(
+        shape: Polygon or MultiPolygon,
+        boundaries: gpd.GeoDataFrame,
+        shape_name: str = ""
+    ):
+        intersecting = boundaries.loc[boundaries["geometry"].intersects(shape)]
+        if len(intersecting) == 0:
+            return None
+        if len(intersecting) > 1:
+            raise ValueError(
+                f"Multiple intersecting boundaries found for { shape_name }:\n{ intersecting['name'] }"
+            )
+        return intersecting.iloc[0]
+
 
     @staticmethod
     def get_boundaries_by_center(

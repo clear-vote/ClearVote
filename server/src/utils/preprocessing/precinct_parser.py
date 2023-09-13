@@ -15,7 +15,7 @@ class Parser:
             A Pandas DataFrame of precinct data with the following standard named columns:
             - precinct_code: numeric code of the precinct; index of the returned dataframe
             - precinct_name: name of the precinct
-            - shape: polygon boundary of the precinct
+            - geometry: polygon boundary of the precinct
             - num_voters: number of voters in that precinct
             - shape_length: length of the precinct boundary
             - shape_area: area of the precinct boundary
@@ -34,7 +34,6 @@ class Parser:
         mapped_names = {
             "votdst": "precinct_code",
             "NAME": "precinct_name",
-            "geometry": "shape",
             "SUM_VOTERS": "num_voters",
             "Shape_Length": "shape_length",
             "Shape_Area": "shape_area",
