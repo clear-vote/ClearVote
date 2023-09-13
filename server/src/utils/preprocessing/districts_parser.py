@@ -73,7 +73,7 @@ class KingCountyDistrictsParser:
             RuntimeError: if connection failed or invalid response from the given url.
         """
         try:
-            data_response = requests.get(data_req.prepare(), timeout=10)
+            data_response = KingCountyDistrictsParser.session.get(data_req.prepare(), timeout=10)
             if not data_response.ok:
                 raise RuntimeError("Invalid response from server.")
             json_data = data_response.content
