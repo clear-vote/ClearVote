@@ -7,7 +7,6 @@ from src.utils.judging.drafter import Drafter
 from urllib.parse import unquote
 
 def init_app(app):
-    
     @app.route("/")
     def index():
         return redirect(url_for('address_lookup'))
