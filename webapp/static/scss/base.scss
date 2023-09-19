@@ -1,0 +1,98 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+/* NOTE: after all changes, run `sass scss/base.scss assets/base.css` */
+
+// Variables
+$primary-color: #3498db;
+$secondary-color: #f39c12;
+$white: #ffffff;
+$black: #333333;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Reset some default browser styles
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+// Body and global styles
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: $white;
+  color: $black;
+}
+
+// Header
+header {
+  background-color: $primary-color;
+  color: $white;
+  padding: 1rem 0;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+// Navigation
+nav {
+  background-color: $secondary-color;
+  color: $white;
+
+  ul {
+    @include flex-center;
+    list-style: none;
+
+    li {
+      margin: 0 15px;
+    }
+  }
+}
+
+// Main content
+.main-content {
+  padding: 20px;
+  background-color: lighten($primary-color, 10%);
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+// Footer
+footer {
+  background-color: darken($primary-color, 10%);
+  color: $white;
+  text-align: center;
+  padding: 1rem 0;
+
+  p {
+    margin-top: 10px;
+  }
+}
+
+// Button
+.button {
+  background-color: $secondary-color;
+  color: $white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}

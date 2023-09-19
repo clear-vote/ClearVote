@@ -1,0 +1,27 @@
+{
+  "name": "clearvote",
+  "version": "1.0.0",
+  "description": "Politicians use data to profile you, so this app uses data to profile politicians. Everyone deserves to know who they are voting for! # Goal Get people voting *more* for the [[off-cycle elections]] than [[federal elections]] ## Why - Authoritarian rulership prevents humanity from seeking truth and aspiring to higher ideals. These ideals can enable innovation driven by a higher purpose, as opposed to those driven by nationalism or capital. With enough of these ideals, we can shape society’s collective intent to one that strives to provide all life, present and future, with the means to achieve its full potential.  - Enhancing the political agency of individuals is the best way to prevent Authoritarianism from taking control in human societies. Democracy does give people the means to exert this political agency, but it’s most effective at a smaller scale where: \t- constituents are more likely to interact with their representatives \t- representatives are more likely to consider their constituent’s needs \t- and faster, more effective action can be taken in a way that best fits the needs of the community - If people were to participate in [[off-cycle elections]], more than the [[federal elections]], we would see a revolutionary shift in power that enables communities to be more adaptable and engaged. On an individual level, this would grant personal agency to the individual need to prevent authoritarianism from taking root in society, enabling more well-intentioned innovations driven by higher ideals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile_sass": "sass --watch scss:assets/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jkru3/ClearVote.git"
+  },
+  "keywords": [],
+  "author": "ClearVote",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkru3/ClearVote/issues"
+  },
+  "homepage": "https://github.com/jkru3/ClearVote#readme",
+  "devDependencies": {
+    "sass": "^1.66.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  }
+}
