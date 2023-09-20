@@ -4,6 +4,9 @@ import math
 import os
 import random
 import logging
+import numpy as np
+import pandas as pd
+import copy
 
 class Drafter:
     """
@@ -23,160 +26,144 @@ class Drafter:
     """
     pass
 
-    def _draft_issues(candidate_set):
-        """
-        This is the drafting algorithm
-        """
-        drafted_issues = {person['name']: [] for person in candidate_set}
-        unassigned_issues = set()
+    # def _filter_issues(candidates, min_rating, max_index):
+    #     """
+    #     This function filters the issues for each candidate based on the minimum rating and maximum index
+    #     """
+    #     for candidate in candidates:
+    #         # Filter based on the minimum rating
+    #         candidate['issues'] = [(value, rating) for value, rating in candidate['issues'] if rating >= min_rating]
 
-        for candidate in candidate_set:
-            candidate['issues'] = sorted(candidate['issues'], key=lambda x: x[1], reverse=True)
-            unassigned_issues.update([value for value, _ in candidate['issues']])
+    #         # Cut off based on the maximum index
+    #         candidate['issues'] = candidate['issues'][:max_index]
 
-        while unassigned_issues:
-            # Find the people who have the least number of picks but still have preferences
-            candidates = [candidate for candidate in candidate_set if candidate['issues']]
-            if not candidates:
-                break
+    # # TODO: this function should randomize the issues a small amount, to prevent ties from occuring in the algorithm
+    # def _randomize_value(value):
+    #     pass
 
-            min_picked = min(len(drafted_issues[candidate['name']]) for candidate in candidates)
-            next_pickers = [candidate for candidate in candidates if len(drafted_issues[candidate['name']]) == min_picked]
+    # def _calibrate_issues(candidates):
+    #     RATING_RANGE = 100
+    #     for candidate in candidates:
+    #         sum_ratings = 0
+    #         for value in candidate['issues']:
+    #             sum_ratings += value[1]
+    #         scalar = RATING_RANGE / sum_ratings
+    #         new_issues = []
+    #         for value in candidate['issues']:
+    #             new_issues.append((value[0], value[1] * scalar))
+    #         candidate['issues'] = new_issues
 
-            max_rating = -1
-            next_value = None
-            next_picker = None
-
-            for candidate in next_pickers:
-                top_value, top_rating = candidate['issues'][0]
-                if top_rating > max_rating:
-                    max_rating = top_rating
-                    next_value = top_value
-                    next_picker = candidate
-
-            drafted_issues[next_picker['name']].append(next_value)
-            unassigned_issues.remove(next_value)
-
-            for candidate in candidate_set:
-                candidate['issues'] = [(value, rating) for value, rating in candidate['issues'] if value != next_value]
-
-        return drafted_issues
-
-    def _filter_issues(candidates, min_rating, max_index):
-        """
-        This function filters the issues for each candidate based on the minimum rating and maximum index
-        """
-        for candidate in candidates:
-            # Filter based on the minimum rating
-            candidate['issues'] = [(value, rating) for value, rating in candidate['issues'] if rating >= min_rating]
-
-            # Cut off based on the maximum index
-            candidate['issues'] = candidate['issues'][:max_index]
-
-    # TODO: this function should randomize the issues a small amount, to prevent ties from occuring in the algorithm
-    def _randomize_value(value):
-        pass
-
-    def _calibrate_issues(candidates):
-        RATING_RANGE = 100
-        for candidate in candidates:
-            sum_ratings = 0
-            for value in candidate['issues']:
-                sum_ratings += value[1]
-            scalar = RATING_RANGE / sum_ratings
-            new_issues = []
-            for value in candidate['issues']:
-                new_issues.append((value[0], value[1] * scalar))
-            candidate['issues'] = new_issues
-
-    def _calculate_cutoffs(candidates):
-        RATING_RANGE = 100
-        MAX_SCALAR = 4
-        num_issues = len(candidates[0]['issues'])
-        num_candidates = len(candidates)
-        scalar = math.floor(num_issues / num_candidates)
-        if scalar > MAX_SCALAR:
-            scalar = MAX_SCALAR
-        return RATING_RANGE / num_issues + 0.05, math.floor(scalar * num_candidates * 0.5)
+    # def _calculate_cutoffs(candidates):
+    #     RATING_RANGE = 100
+    #     MAX_SCALAR = 4
+    #     num_issues = len(candidates[0]['issues'])
+    #     num_candidates = len(candidates)
+    #     scalar = math.floor(num_issues / num_candidates)
+    #     if scalar > MAX_SCALAR:
+    #         scalar = MAX_SCALAR
+    #     return RATING_RANGE / num_issues + 0.05, math.floor(scalar * num_candidates * 0.5)
 
     # used in Flask
     def filter_contest_data(precinct):
+        
         # This format MUST be followed for the server to be able to read it!!
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, 'compiled_election_datasets', 'wa_king', 'wa_seattle_elections.json')
-
+        file_path = os.path.join(base_dir, 'composite_election_datasets', 'wa_king', 'wa_seattle_elections.json')
+        
         with open(file_path, 'r') as f:
-            election_data = json.load(f)
-        last_index = len(election_data['elections']) - 1 # will retrieve the most recently posted election
-        filtered_election = {
-            "election_type": election_data['elections'][last_index]['election_type'],
-            "registration_deadline": election_data['elections'][last_index]['registration_deadline'],
-            "voting_open": election_data['elections'][last_index]['voting_open'],
-            "voting_close": election_data['elections'][last_index]['voting_close'],
-            "contests": []
-        }
-        for contest in election_data['elections'][last_index]["contests"]:
-            for district in contest["districts"]:
-                if contest["contest_type"] == "city_council" and precinct.city_council_dist == district['position_number'] or contest["contest_type"] == "port_commissioner":
-                    candidates = district["candidates"]
-                    
-                    for candidate in candidates:
-                        candidate['issues'] = [(k, v) for k, v in candidate['issues']]
-                    
-                    min_rating, num_issues_to_show = Drafter._calculate_cutoffs(candidates)
+            json_data = json.load(f)
 
-                    # Apply the filters
-                    Drafter._calibrate_issues(candidates)
-                    # Drafter._randomize_issues(candidates)
-                    Drafter._filter_issues(candidates, min_rating, num_issues_to_show)
-                    # Apply the draft
-                    # result = Drafter._draft_issues(candidates)
-
-                    filtered_election['contests'].append({
-                        "contest_type": contest['contest_type'],
-                        "districts": [
-                            {
-                                "position_number": district['position_number'],
-                                "candidates": candidates
+        def extract_last_election_data(json_data, position_dict):
+            new_array = []
+            
+            # Get the last election
+            last_election = json_data['elections'][-1]
+            
+            # Loop through contests
+            for contest in last_election['contests']:
+                contest_type = contest['contest_type']
+                
+                # Check if this contest type is in the position_dict
+                if contest_type in position_dict:
+                    target_position_number = position_dict[contest_type]
+                    
+                    # Loop through districts
+                    for district in contest['districts']:
+                        pos_num = district['position_number']
+                        
+                        # Check if position number matches
+                        if pos_num == target_position_number:
+                            new_contest_data = {
+                                "contest_type": contest_type,
+                                "position_number": pos_num,
+                                "candidates": district['candidates']
                             }
-                        ]
-                    })
-        return filtered_election
+                            new_array.append(new_contest_data)
+                            
+            return new_array
+        
+        def process_contest_types(precinct_data):
+            drafted_data = copy.deepcopy(precinct_data)
+            for contest in drafted_data:
+                contest['candidates'] = draft_candidates(contest)
+            return drafted_data
+                
+        def draft_candidates(contest):
+            issues_and_scores = copy.deepcopy(contest['candidates'])
+            drafted_issues = [{**candidate, 'issues': [], 'num_issues': 0} for candidate in contest['candidates']]
 
-    def get_entire_contest():
-        # This format MUST be followed for the server to be able to read it!!
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, 'compiled_election_datasets', 'wa_king', 'wa_seattle_elections.json')
+            while len(issues_and_scores[0]['issues']) > 0:
+                highest_rating = 0
+                highest_issue_candidate = None
+                highest_issue_name = None
+                
+                # Find the minimum number of issues that have been assigned to a candidate so far
+                min_issues_assigned = min(candidate['num_issues'] for candidate in drafted_issues)
 
-        with open(file_path, 'r') as f:
-            election_data = json.load(f)
-        last_index = len(election_data['elections']) - 1 # will retrieve the most recently posted election
-        return election_data['elections'][last_index]
-    
-    # used in main
-    def print_contest_data(election, precinct):
-        # Extract the data and apply the draft_issues function to each district
-        for contest in election["contests"]:
-            for district in contest["districts"]:
-                if contest["contest_type"] == "city_council" and precinct.city_council_dist == district['position_number'] or contest["contest_type"] == "port_commissioner":
-                    candidates = district["candidates"]
-                    
-                    for candidate in candidates:
-                        candidate['issues'] = [(k, v) for k, v in candidate['issues']]
-                    
-                    min_rating, num_issues_to_show = Drafter._calculate_cutoffs(candidates)
+                for candidate in issues_and_scores:
+                    if candidate['issues']:  # Only consider candidates that have issues left
+                        draft_candidate = next(dc for dc in drafted_issues if dc['name'] == candidate['name'])
+                        # Skip this candidate if they already have more issues than the current minimum
+                        if draft_candidate['num_issues'] > min_issues_assigned:
+                            continue
 
-                    # Apply the filters
-                    Drafter._calibrate_issues(candidates)
-                    # Drafter._randomize_issues(candidates)
-                    Drafter._filter_issues(candidates, min_rating, num_issues_to_show)
+                        max_issue_rating = max(candidate['issues'], key=lambda x: x[1])[1]
+                        if max_issue_rating > highest_rating:
+                            highest_rating = max_issue_rating
+                            highest_issue_candidate = candidate
+                            highest_issue_name = [issue[0] for issue in candidate['issues'] if issue[1] == highest_rating]
 
-                    # Apply the draft
-                    result = Drafter._draft_issues(candidates)
-                    
-                    print(contest['contest_type'], f"position {district['position_number']}")
-                    for name, issues in result.items():
-                        print(f"  {name}:")
-                        for value in issues:
-                            print(f"    - {value}")
-                    print("\n")
+                if highest_issue_candidate is None:  # No eligible candidates
+                    break
+
+                selected_issue = random.choice(highest_issue_name)
+
+                for draft_candidate in drafted_issues:
+                    if draft_candidate['name'] == highest_issue_candidate['name']:
+                        draft_candidate['issues'].append([selected_issue, highest_rating])
+                        draft_candidate['num_issues'] += 1  # Increment the number of issues for this candidate
+                        break
+
+                for candidate in issues_and_scores:
+                    candidate['issues'] = [issue for issue in candidate['issues'] if issue[0] != selected_issue]
+
+            # for candidate in drafted_issues:
+            #     name = candidate['name']
+            #     issues = candidate['issues']
+
+            #     df = pd.DataFrame(issues, columns=['Issue', 'Score'])
+            #     print(f"Data for {name}:")
+            #     print(df.to_string(index=False))
+            #     print()
+
+            return drafted_issues
+
+        position_dict = {
+            "city_council": precinct.get_city_council_dist(),
+            "port_commissioner": 5,
+        }
+
+        precinct_data = extract_last_election_data(json_data, position_dict)
+
+        drafted_data = process_contest_types(precinct_data)
+        return drafted_data
