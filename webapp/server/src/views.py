@@ -5,8 +5,43 @@ from src.utils.mapping.mapper import Mapper
 from src.utils.data.precinct import Precinct
 from src.utils.judging.drafter import Drafter
 from urllib.parse import unquote
+from random import Random, randint, shuffle
 
 def init_app(app):
+    iconMapping = {
+        'Wellbeing': 'fa-heart',
+        'Homelessness': 'fa-home',
+        'Emergency': 'fa-ambulance',
+        'Justice': 'fa-balance-scale',
+        'Security': 'fa-shield-alt',
+        'Transit': 'fa-bus',
+        'Infrastructure': 'fa-road',
+        'Economics': 'fa-chart-line',
+        'Community': 'fa-users',
+        'Environment': 'fa-leaf',
+        'Development': 'fa-hammer',
+        'Zoning': 'fa-map-signs',
+        'Accountability': 'fa-check-circle',
+        'Operations': 'fa-cogs',
+        'Services': 'fa-concierge-bell',
+        'Management': 'fa-briefcase',
+        'Academics': 'fa-book',
+        'Teachers': 'fa-chalkboard-teacher',
+        'Quality': 'fa-star',
+        'Funding': 'fa-dollar-sign',
+        'Equity': 'fa-equals',
+        'Safety': 'fa-hard-hat',
+        'Opportunity': 'fa-lightbulb',
+        'Extracurricular': 'fa-football-ball',
+        'Policy': 'fa-gavel'
+    }
+
+    @app.context_processor
+    def utility_processor():
+        def get_icon_for_word(word):
+            return iconMapping.get(word, 'fa-question')
+        return dict(getIconForWord=get_icon_for_word)
+    
     @app.route("/")
     def index():
         return redirect(url_for('address_lookup'))
@@ -35,8 +70,20 @@ def init_app(app):
         form = CandidatePage()
         mapper = Mapper()
         try:
+            # Define a seed value
+            seed = randint(0, 10**6)
             precinct = mapper.get_precinct(address)
-            election = Drafter.filter_contest_data(precinct=precinct)
+            # Shuffle candidates for highlights_election
+            highlights_election = Drafter.draft(precinct=precinct)
+            rand_instance1 = Random(seed)  # Create a new Random instance with the seed
+            for contest in highlights_election:
+                shuffle(contest['candidates'], random=rand_instance1.random)
+            # Shuffle candidates for total_election
+            total_election = Drafter.get_contest_data(precinct)
+            rand_instance2 = Random(seed)  # Create another new Random instance with the same seed
+            for contest in total_election:
+                shuffle(contest['candidates'], random=rand_instance2.random)
+
         except ValueError:
             return f"{ address } is not in a known Seattle precinct."
         except RuntimeError:
@@ -44,7 +91,7 @@ def init_app(app):
         if form.validate_on_submit():
             if form.Next:
                 return redirect(url_for("create_user"))
-        return render_template("candidate_info.html", address=address, precinct=precinct, election=election)
+        return render_template("candidate_info.html", address=address, precinct=precinct, highlights_election=highlights_election, total_election=total_election)
 
     @app.route("/create_user/", methods=["GET", "POST"])
     def create_user():

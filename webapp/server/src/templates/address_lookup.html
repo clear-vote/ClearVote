@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
-        <h1>Welcome to ClearVote!</h1>
-        <p>Our goal is to help the public stay up-to-date in off-cycle elections and understand who they are voting for</p>
+<div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-6 text-center bg-light shadow p-4 rounded border border-grey">
+        <div class="p-4">
+            <h1>Welcome to ClearVote</h1>
+            <p>Our goal is to help the public stay up-to-date with off-cycle elections and understand who they are voting for</p>
+        </div>
+        <div>
+            <span class="pt-4">To get started, please enter a valid Seattle address</span>
+            <!--TODO: add a ? icon here that when you hover over it, a hover over says "why do you need this?" and if you click on it a popover shows up with some information-->
+            <form action="/address" method='post' autocomplete="off">
+                {{ form.hidden_tag() }}
+                <div class="pb-5">
+                    {{ form.address(class="form-control shadow", placeholder="University of Washington, Seattle, WA") }}
+                </div>
+                <div>
+                    {{ form.submit(class="d-grid gap-2 col-sm-4 mx-auto mb-4 shadow btn btn-outline-primary") }}
+                    <!--TODO: validate address before moving on-->
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <p>To get started, please enter your address</p>
-        <small>Note: at the moment, we only support address lookup in Seattle, WA</small>
-        <!--TODO: "why do you need my address?"-->
-        <!--TODO: validate address before moving on-->
-        <form action="/address" method='post' >
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.address.label }}
-                {{ form.address() }}
-            </p>
-            <p>
-                {{ form.submit() }}
-            </p>
-        </form>
-    </div>
+</div>
 {% endblock %}

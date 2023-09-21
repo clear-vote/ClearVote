@@ -1,29 +1,109 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
-        <p>Voting information for {{ address }}</p>
-        <p>Precinct: {{ precinct.get_name() }}</p>
-    </div>
-
-    <div>
-        {% for contest in election %}
-            <h3>Contest: {{ contest.contest_type.replace('_', ' ').title() }} Position {{ contest.position_number }}</h3>
+<div class="container my-5 text-center d-flex flex-column justify-content-center">
+    <p class="fw-bold h4">Voting information for "{{ address }}"; precinct: {{ precinct.get_name() }}</p>
+    <!-- Implement switch here -->
+    <button class="col-md-4 offset-md-4 col-10 offset-1 btn btn-outline-primary shadow my-3" onclick="toggleElections()" id="toggleBtn">Show all political value metrics</button>
+    <div class="d-flex flex-column align-items-center" id="highlights">
+        {% for contest in highlights_election %}
+        <div class="m-3 p-4 col-12 col-lg-8 offset-lg-2 rounded border border-black shadow bg-light">
+            <h3 class="mb-3">Contest: {{ contest.contest_type.replace('_', ' ').title() }} Position {{ contest.position_number }}</h3>
+            <div class="row justify-content-center">
                 {% for candidate in contest.candidates %}
-                    <div class="col">
-                        <h5>{{ candidate.name.replace('_', ' ') }}</h5>
-                        <ul>
-                            {% for issue in candidate.issues %}
-                                <li>{{ issue[0] }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="col-md-3 m-2 p-2 rounded shadow border border-black">
+                    <h5>{{ candidate.name.replace('_', ' ') }}</h5>
+                    <ul class="list-unstyled">
+                        {% for issue in candidate.issues %}
+                        <li>
+                            <i class="fa {{ getIconForWord(issue[0]) }}"></i> {{ issue[0] }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endfor %}
+            </div>
+        </div>
         {% endfor %}
     </div>
-    
-    <form action="/create_user" method="get">
-        <input type="submit" value="Next"/>
-    </form>
+    <!--SHOW POLITICAL VALUE METRICS-->
+    <div class="d-flex flex-column align-items-center d-none" id="total">
+        {% for contest in total_election %}
+        <div class="m-3 p-4 col-12 col-lg-8 offset-lg-2 rounded border border-black shadow bg-light">
+            <h3 class="mb-3">Contest: {{ contest.contest_type.replace('_', ' ').title() }} Position {{ contest.position_number }}</h3>
+            <div class="row justify-content-center">
+                {% for candidate in contest.candidates %}
+                <div class="col-md-3 m-2 p-2 rounded shadow border border-black">
+                    <h5>{{ candidate.name.replace('_', ' ') }}</h5>
+                    <ul class="list-unstyled">
+                        {% for issue in candidate.issues %}
+                        <li>
+                            <i class="fa {{ getIconForWord(issue[0]) }}"></i> {{ issue[0] }}
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ issue[1] }}%;" aria-valuenow="{{ issue[1] }}" aria-valuemin="10" aria-valuemax="100"></div>
+                            </div>
+                        </li>
 
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="/create_user" method="get" class="mt-3 col-md-4 offset-md-4 col-10 offset-1">
+        <input type="submit" value="Next" class="btn btn-outline-primary w-100 shadow" style="width: 80% !important; margin-left: 10%; margin-right: 10%;" />
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function toggleElections() {
+    var highlightsDiv = document.getElementById("highlights");
+    var totalDiv = document.getElementById("total");
+    var btn = document.getElementById("toggleBtn");
+
+    if (highlightsDiv.classList.contains("d-none")) {
+      highlightsDiv.classList.remove("d-none");
+      totalDiv.classList.add("d-none");
+      btn.innerHTML = "Show all Political Value Metrics";
+    } else {
+      highlightsDiv.classList.add("d-none");
+      totalDiv.classList.remove("d-none");
+      btn.innerHTML = "Show Highlights";
+    }
+  }
+  function getIconForWord(word) {
+    const iconMapping = {
+        'Wellbeing': 'fa-heart',
+        'Homelessness': 'fa-home',
+        'Emergency': 'fa-ambulance',
+        'Justice': 'fa-balance-scale',
+        'Security': 'fa-shield-alt',
+        'Transit': 'fa-bus',
+        'Infrastructure': 'fa-road',
+        'Economics': 'fa-chart-line',
+        'Community': 'fa-users',
+        'Environment': 'fa-leaf',
+        'Development': 'fa-hammer',
+        'Zoning': 'fa-map-signs',
+        'Accountability': 'fa-check-circle',
+        'Operations': 'fa-cogs',
+        'Services': 'fa-concierge-bell',
+        'Management': 'fa-briefcase',
+        'Academics': 'fa-book',
+        'Teachers': 'fa-chalkboard-teacher',
+        'Quality': 'fa-star',
+        'Funding': 'fa-dollar-sign',
+        'Equity': 'fa-equals',
+        'Safety': 'fa-hard-hat',
+        'Opportunity': 'fa-lightbulb',
+        'Extracurricular': 'fa-football-ball',
+        'Policy': 'fa-gavel'
+    };
+  return iconMapping[word] || 'fa-question-circle'; // Default icon
+}
+</script>
 {% endblock %}

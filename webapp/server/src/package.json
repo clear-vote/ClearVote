@@ -1,0 +1,14 @@
+{
+  "name": "ClearVote",
+  "version": "1.0.0",
+  "description": "A voting app",
+  "scripts": {
+    "compile_sass": "sass --watch scss:assets/css"
+  },
+  "devDependencies": {
+    "sass": "^1.66.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  }
+}
