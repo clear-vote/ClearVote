@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "static": "static",
+    "static": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -9,7 +9,8 @@
     "rewrites": [{
       "source": "**",
       "run": {
-        "serviceId": "clear-vote"
+        "serviceId": "clear-vote",
+        "region": "us-west1"
       }
     }]
   }

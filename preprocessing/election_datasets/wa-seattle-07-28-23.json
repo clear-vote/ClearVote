@@ -1,0 +1,81 @@
+{
+    "municipality": "Seattle",
+    "state": "WA",
+    "elections": [
+        {
+            "election_type": "Primary",
+            "registration_deadline": "1690243199",
+            "voting_open": "1690588800",
+            "voting_close": "1690945200",
+            "contests": [
+                {
+                    "contest_type": "city_council",
+                    "districts": [
+                        {
+                            "position_number": 1,
+                            "candidates": [
+                                {
+                                    "name": "Jean_Iannelli_Craciun",
+                                    "issues": [
+                                        [
+                                            "Wellbeing",
+                                            80
+                                        ],
+                                        [
+                                            "Homelessness",
+                                            70
+                                        ],
+                                        [
+                                            "Emergency",
+                                            60
+                                        ],
+                                        [
+                                            "Justice",
+                                            70
+                                        ],
+                                        [
+                                            "Security",
+                                            75
+                                        ],
+                                        [
+                                            "Transit",
+                                            60
+                                        ],
+                                        [
+                                            "Infrastructure",
+                                            70
+                                        ],
+                                        [
+                                            "Economics",
+                                            80
+                                        ],
+                                        [
+                                            "Community",
+                                            85
+                                        ],
+                                        [
+                                            "Environment",
+                                            75
+                                        ],
+                                        [
+                                            "Development",
+                                            70
+                                        ],
+                                        [
+                                            "Zoning",
+                                            65
+                                        ],
+                                        [
+                                            "Accountability",
+                                            80
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
