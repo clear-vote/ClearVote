@@ -1,7 +1,7 @@
 [
   {
     "contest_type": "city_council",
-    "values": [
+    "issues": [
       ["Wellbeing", "Affordable utilities, public services, housing; tenant protections; emergency relief; public health screening and research"],
       ["Homelessness", "mental health preventative programs and crisis response services; drug abuse rehabilitation initiatives"],
       ["Emergency", "disaster preparation initiatives, emergency services, and climate resilience planning"],
@@ -19,7 +19,7 @@
   },
   {
     "contest_type": "port_commissioner",
-    "values": [
+    "issues": [
       ["Operations", "maritime safety, fishery management, harbor maintenance, navigational aids, dredging projects, pilotage services, vessel tracking systems"],
       ["Economics", "commercial fishing interests; alternative revenue streams; trade and private-public partnerships, job creation, global supply chain resiliency, market analysis and strategy"],
       ["Environment", "air quality standards, water quality monitoring, noise reduction, renewable energy use, carbon emissions reduction, wildlife conservation, coastal erosion management"],
@@ -33,7 +33,7 @@
   },
   {
     "contest_type": "school_district_director",
-    "values": [
+    "issues": [
       ["Academics", "STEM and digital literacy initiatives; reading, arts and humanities; foreign language programs; gifted programs, college readiness, and standardized test prep; tutoring"],
       ["Teachers", "teacher retention, evaluation, accountability, and incentives; professional development for staff"],
       ["Quality", "class size reduction; distance learning and mental health support; special education and social-emotional learning; counseling services; physical education and nutritional programs; dropout prevention"],

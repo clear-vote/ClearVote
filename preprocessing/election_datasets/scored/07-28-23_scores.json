@@ -4,9 +4,9 @@
     "elections": [
         {
             "election_type": "Primary",
-            "registration_deadline": 1690243199,
-            "voting_open": 1690588800,
-            "voting_close": 1690945200,
+            "registration_deadline": "1690243199",
+            "voting_open": "1690588800",
+            "voting_close": "1690945200",
             "contests": [
                 {
                     "contest_type": "city_council",
@@ -39,7 +39,7 @@
                                         ],
                                         [
                                             "Transit",
-                                            60
+                                            50
                                         ],
                                         [
                                             "Infrastructure",
@@ -96,27 +96,27 @@
                                         ],
                                         [
                                             "Transit",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Infrastructure",
-                                            0
-                                        ],
-                                        [
-                                            "Economics",
                                             60
                                         ],
                                         [
-                                            "Community",
-                                            75
-                                        ],
-                                        [
-                                            "Environment",
+                                            "Economics",
                                             50
                                         ],
                                         [
+                                            "Community",
+                                            70
+                                        ],
+                                        [
+                                            "Environment",
+                                            40
+                                        ],
+                                        [
                                             "Development",
-                                            65
+                                            60
                                         ],
                                         [
                                             "Zoning",
@@ -124,7 +124,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            55
+                                            50
                                         ]
                                     ]
                                 },
@@ -161,15 +161,15 @@
                                         ],
                                         [
                                             "Economics",
-                                            60
+                                            0
                                         ],
                                         [
                                             "Community",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Environment",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Development",
@@ -181,7 +181,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            70
                                         ]
                                     ]
                                 },
@@ -238,7 +238,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            90
+                                            80
                                         ]
                                     ]
                                 },
@@ -271,15 +271,15 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            40
+                                            30
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Environment",
@@ -295,7 +295,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            90
+                                            80
                                         ]
                                     ]
                                 },
@@ -304,11 +304,11 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Homelessness",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Emergency",
@@ -316,43 +316,43 @@
                                         ],
                                         [
                                             "Justice",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Transit",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Infrastructure",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Economics",
-                                            80
-                                        ],
-                                        [
-                                            "Community",
-                                            85
-                                        ],
-                                        [
-                                            "Environment",
                                             70
                                         ],
                                         [
+                                            "Community",
+                                            80
+                                        ],
+                                        [
+                                            "Environment",
+                                            60
+                                        ],
+                                        [
                                             "Development",
-                                            75
+                                            60
                                         ],
                                         [
                                             "Zoning",
-                                            0
+                                            50
                                         ],
                                         [
                                             "Accountability",
-                                            80
+                                            70
                                         ]
                                     ]
                                 },
@@ -373,11 +373,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -409,7 +409,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            70
                                         ]
                                     ]
                                 },
@@ -434,7 +434,7 @@
                                         ],
                                         [
                                             "Security",
-                                            60
+                                            50
                                         ],
                                         [
                                             "Transit",
@@ -446,11 +446,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            90
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -458,7 +458,7 @@
                                         ],
                                         [
                                             "Development",
-                                            75
+                                            60
                                         ],
                                         [
                                             "Zoning",
@@ -466,7 +466,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            50
+                                            60
                                         ]
                                     ]
                                 }
@@ -500,7 +500,7 @@
                                         ],
                                         [
                                             "Transit",
-                                            30
+                                            0
                                         ],
                                         [
                                             "Infrastructure",
@@ -508,11 +508,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            50
+                                            0
                                         ],
                                         [
                                             "Environment",
@@ -520,11 +520,11 @@
                                         ],
                                         [
                                             "Development",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Zoning",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Accountability",
@@ -545,15 +545,15 @@
                                         ],
                                         [
                                             "Emergency",
-                                            0
+                                            60
                                         ],
                                         [
                                             "Justice",
-                                            80
+                                            85
                                         ],
                                         [
                                             "Security",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -569,11 +569,11 @@
                                         ],
                                         [
                                             "Community",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Environment",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Development",
@@ -622,7 +622,7 @@
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -642,7 +642,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            90
+                                            80
                                         ]
                                     ]
                                 }
@@ -733,11 +733,11 @@
                                         ],
                                         [
                                             "Transit",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Infrastructure",
-                                            0
+                                            60
                                         ],
                                         [
                                             "Economics",
@@ -745,7 +745,7 @@
                                         ],
                                         [
                                             "Community",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Environment",
@@ -753,7 +753,7 @@
                                         ],
                                         [
                                             "Development",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Zoning",
@@ -761,7 +761,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            85
+                                            70
                                         ]
                                     ]
                                 },
@@ -770,11 +770,11 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Homelessness",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Emergency",
@@ -786,11 +786,11 @@
                                         ],
                                         [
                                             "Security",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Transit",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Infrastructure",
@@ -802,7 +802,7 @@
                                         ],
                                         [
                                             "Community",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Environment",
@@ -818,7 +818,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            85
+                                            70
                                         ]
                                     ]
                                 },
@@ -827,11 +827,11 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            70
+                                            0
                                         ],
                                         [
                                             "Homelessness",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Emergency",
@@ -839,11 +839,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Security",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -859,7 +859,7 @@
                                         ],
                                         [
                                             "Community",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -875,7 +875,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            100
+                                            90
                                         ]
                                     ]
                                 },
@@ -896,11 +896,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            80
+                                            85
                                         ],
                                         [
                                             "Security",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -908,11 +908,11 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            70
+                                            75
                                         ],
                                         [
                                             "Economics",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -920,7 +920,7 @@
                                         ],
                                         [
                                             "Environment",
-                                            75
+                                            80
                                         ],
                                         [
                                             "Development",
@@ -932,7 +932,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            75
                                         ]
                                     ]
                                 },
@@ -941,19 +941,19 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            90
-                                        ],
-                                        [
-                                            "Homelessness",
                                             80
                                         ],
                                         [
+                                            "Homelessness",
+                                            70
+                                        ],
+                                        [
                                             "Emergency",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Justice",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Security",
@@ -965,15 +965,15 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Environment",
@@ -981,15 +981,15 @@
                                         ],
                                         [
                                             "Development",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Zoning",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Accountability",
-                                            85
+                                            80
                                         ]
                                     ]
                                 },
@@ -1006,7 +1006,7 @@
                                         ],
                                         [
                                             "Emergency",
-                                            0
+                                            70
                                         ],
                                         [
                                             "Justice",
@@ -1014,7 +1014,7 @@
                                         ],
                                         [
                                             "Security",
-                                            0
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -1026,11 +1026,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            70
+                                            75
                                         ],
                                         [
                                             "Community",
-                                            75
+                                            85
                                         ],
                                         [
                                             "Environment",
@@ -1038,7 +1038,7 @@
                                         ],
                                         [
                                             "Development",
-                                            0
+                                            70
                                         ],
                                         [
                                             "Zoning",
@@ -1046,7 +1046,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            80
                                         ]
                                     ]
                                 },
@@ -1071,7 +1071,7 @@
                                         ],
                                         [
                                             "Security",
-                                            0
+                                            50
                                         ],
                                         [
                                             "Transit",
@@ -1079,11 +1079,11 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -1129,11 +1129,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -1145,11 +1145,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            50
+                                            0
                                         ],
                                         [
                                             "Environment",
@@ -1157,7 +1157,7 @@
                                         ],
                                         [
                                             "Development",
-                                            65
+                                            0
                                         ],
                                         [
                                             "Zoning",
@@ -1165,7 +1165,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            85
+                                            80
                                         ]
                                     ]
                                 },
@@ -1218,7 +1218,7 @@
                                         ],
                                         [
                                             "Zoning",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Accountability",
@@ -1231,19 +1231,19 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            70
-                                        ],
-                                        [
-                                            "Homelessness",
                                             80
                                         ],
                                         [
+                                            "Homelessness",
+                                            70
+                                        ],
+                                        [
                                             "Emergency",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Justice",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Security",
@@ -1259,11 +1259,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Community",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -1271,7 +1271,7 @@
                                         ],
                                         [
                                             "Development",
-                                            60
+                                            50
                                         ],
                                         [
                                             "Zoning",
@@ -1279,7 +1279,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            80
+                                            70
                                         ]
                                     ]
                                 },
@@ -1296,15 +1296,15 @@
                                         ],
                                         [
                                             "Emergency",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Justice",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Security",
-                                            90
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -1312,31 +1312,31 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            60
+                                            0
                                         ],
                                         [
                                             "Economics",
-                                            95
-                                        ],
-                                        [
-                                            "Community",
                                             80
                                         ],
                                         [
-                                            "Environment",
+                                            "Community",
                                             70
                                         ],
                                         [
-                                            "Development",
-                                            65
-                                        ],
-                                        [
-                                            "Zoning",
+                                            "Environment",
                                             60
                                         ],
                                         [
+                                            "Development",
+                                            0
+                                        ],
+                                        [
+                                            "Zoning",
+                                            0
+                                        ],
+                                        [
                                             "Accountability",
-                                            85
+                                            70
                                         ]
                                     ]
                                 }
@@ -1386,7 +1386,7 @@
                                         ],
                                         [
                                             "Environment",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Development",
@@ -1419,7 +1419,7 @@
                                         ],
                                         [
                                             "Justice",
-                                            70
+                                            20
                                         ],
                                         [
                                             "Security",
@@ -1431,7 +1431,7 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            60
+                                            30
                                         ],
                                         [
                                             "Economics",
@@ -1439,7 +1439,7 @@
                                         ],
                                         [
                                             "Community",
-                                            80
+                                            50
                                         ],
                                         [
                                             "Environment",
@@ -1480,27 +1480,27 @@
                                         ],
                                         [
                                             "Security",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Transit",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Infrastructure",
-                                            65
+                                            60
                                         ],
                                         [
                                             "Economics",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Community",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Environment",
-                                            55
+                                            60
                                         ],
                                         [
                                             "Development",
@@ -1512,7 +1512,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            100
+                                            90
                                         ]
                                     ]
                                 },
@@ -1541,19 +1541,19 @@
                                         ],
                                         [
                                             "Transit",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Infrastructure",
-                                            50
+                                            60
                                         ],
                                         [
                                             "Economics",
-                                            90
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            100
+                                            80
                                         ],
                                         [
                                             "Environment",
@@ -1569,7 +1569,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            75
+                                            70
                                         ]
                                     ]
                                 },
@@ -1582,7 +1582,7 @@
                                         ],
                                         [
                                             "Homelessness",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Emergency",
@@ -1590,11 +1590,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -1606,7 +1606,7 @@
                                         ],
                                         [
                                             "Economics",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -1614,7 +1614,7 @@
                                         ],
                                         [
                                             "Environment",
-                                            50
+                                            70
                                         ],
                                         [
                                             "Development",
@@ -1626,7 +1626,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            70
+                                            80
                                         ]
                                     ]
                                 },
@@ -1663,11 +1663,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            50
+                                            0
                                         ],
                                         [
                                             "Community",
-                                            85
+                                            90
                                         ],
                                         [
                                             "Environment",
@@ -1675,7 +1675,7 @@
                                         ],
                                         [
                                             "Development",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Zoning",
@@ -1683,7 +1683,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            70
                                         ]
                                     ]
                                 },
@@ -1696,7 +1696,7 @@
                                         ],
                                         [
                                             "Homelessness",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Emergency",
@@ -1704,35 +1704,35 @@
                                         ],
                                         [
                                             "Justice",
-                                            75
-                                        ],
-                                        [
-                                            "Security",
-                                            85
-                                        ],
-                                        [
-                                            "Transit",
                                             80
                                         ],
                                         [
-                                            "Infrastructure",
+                                            "Security",
+                                            80
+                                        ],
+                                        [
+                                            "Transit",
                                             70
+                                        ],
+                                        [
+                                            "Infrastructure",
+                                            50
                                         ],
                                         [
                                             "Economics",
-                                            65
+                                            50
                                         ],
                                         [
                                             "Community",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Environment",
-                                            85
+                                            70
                                         ],
                                         [
                                             "Development",
-                                            70
+                                            60
                                         ],
                                         [
                                             "Zoning",
@@ -1740,7 +1740,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            75
+                                            70
                                         ]
                                     ]
                                 },
@@ -1797,7 +1797,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            60
+                                            70
                                         ]
                                     ]
                                 },
@@ -1806,11 +1806,11 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Homelessness",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Emergency",
@@ -1818,15 +1818,15 @@
                                         ],
                                         [
                                             "Justice",
-                                            85
-                                        ],
-                                        [
-                                            "Security",
                                             70
                                         ],
                                         [
+                                            "Security",
+                                            60
+                                        ],
+                                        [
                                             "Transit",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Infrastructure",
@@ -1846,7 +1846,7 @@
                                         ],
                                         [
                                             "Development",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Zoning",
@@ -1867,7 +1867,7 @@
                                         ],
                                         [
                                             "Homelessness",
-                                            90
+                                            85
                                         ],
                                         [
                                             "Emergency",
@@ -1887,15 +1887,15 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Economics",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Community",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -1957,7 +1957,7 @@
                                         ],
                                         [
                                             "Community",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -1973,7 +1973,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            50
+                                            0
                                         ]
                                     ]
                                 },
@@ -2030,7 +2030,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            70
                                         ]
                                     ]
                                 },
@@ -2067,7 +2067,7 @@
                                         ],
                                         [
                                             "Economics",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -2075,11 +2075,11 @@
                                         ],
                                         [
                                             "Environment",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Development",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Zoning",
@@ -2087,7 +2087,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            80
+                                            70
                                         ]
                                     ]
                                 },
@@ -2108,7 +2108,7 @@
                                         ],
                                         [
                                             "Justice",
-                                            0
+                                            60
                                         ],
                                         [
                                             "Security",
@@ -2124,11 +2124,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Environment",
@@ -2136,7 +2136,7 @@
                                         ],
                                         [
                                             "Development",
-                                            0
+                                            70
                                         ],
                                         [
                                             "Zoning",
@@ -2144,7 +2144,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            50
+                                            60
                                         ]
                                     ]
                                 },
@@ -2169,7 +2169,7 @@
                                         ],
                                         [
                                             "Security",
-                                            75
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -2177,11 +2177,11 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Economics",
-                                            50
+                                            60
                                         ],
                                         [
                                             "Community",
@@ -2201,7 +2201,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            40
+                                            50
                                         ]
                                     ]
                                 },
@@ -2258,7 +2258,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            90
+                                            80
                                         ]
                                     ]
                                 }
@@ -2272,11 +2272,11 @@
                                     "issues": [
                                         [
                                             "Wellbeing",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Homelessness",
-                                            80
+                                            90
                                         ],
                                         [
                                             "Emergency",
@@ -2284,11 +2284,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -2300,11 +2300,11 @@
                                         ],
                                         [
                                             "Economics",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Environment",
@@ -2320,7 +2320,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            50
+                                            60
                                         ]
                                     ]
                                 },
@@ -2345,7 +2345,7 @@
                                         ],
                                         [
                                             "Security",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -2353,7 +2353,7 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            0
+                                            60
                                         ],
                                         [
                                             "Economics",
@@ -2361,7 +2361,7 @@
                                         ],
                                         [
                                             "Community",
-                                            65
+                                            50
                                         ],
                                         [
                                             "Environment",
@@ -2377,7 +2377,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            55
+                                            50
                                         ]
                                     ]
                                 },
@@ -2418,7 +2418,7 @@
                                         ],
                                         [
                                             "Community",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Environment",
@@ -2434,7 +2434,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            65
+                                            60
                                         ]
                                     ]
                                 },
@@ -2455,11 +2455,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Security",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Transit",
@@ -2467,19 +2467,19 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            50
+                                            0
                                         ],
                                         [
                                             "Economics",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            65
+                                            60
                                         ],
                                         [
                                             "Environment",
-                                            55
+                                            60
                                         ],
                                         [
                                             "Development",
@@ -2512,11 +2512,11 @@
                                         ],
                                         [
                                             "Justice",
-                                            60
+                                            50
                                         ],
                                         [
                                             "Security",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Transit",
@@ -2532,7 +2532,7 @@
                                         ],
                                         [
                                             "Community",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Environment",
@@ -2548,7 +2548,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            75
+                                            70
                                         ]
                                     ]
                                 },
@@ -2581,7 +2581,7 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            0
+                                            70
                                         ],
                                         [
                                             "Economics",
@@ -2601,7 +2601,7 @@
                                         ],
                                         [
                                             "Zoning",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Accountability",
@@ -2636,11 +2636,11 @@
                                         ],
                                         [
                                             "Security",
-                                            50
+                                            60
                                         ],
                                         [
                                             "Infrastructure",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Community",
@@ -2652,11 +2652,11 @@
                                         ],
                                         [
                                             "Services",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Management",
-                                            80
+                                            75
                                         ]
                                     ]
                                 },
@@ -2681,23 +2681,23 @@
                                         ],
                                         [
                                             "Infrastructure",
-                                            50
+                                            30
                                         ],
                                         [
                                             "Community",
-                                            90
+                                            70
                                         ],
                                         [
                                             "Accountability",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Services",
-                                            60
+                                            30
                                         ],
                                         [
                                             "Management",
-                                            85
+                                            90
                                         ]
                                     ]
                                 },
@@ -2706,27 +2706,27 @@
                                     "issues": [
                                         [
                                             "Operations",
-                                            80
-                                        ],
-                                        [
-                                            "Economics",
                                             70
                                         ],
                                         [
-                                            "Environment",
-                                            85
-                                        ],
-                                        [
-                                            "Security",
-                                            75
-                                        ],
-                                        [
-                                            "Infrastructure",
+                                            "Economics",
                                             60
                                         ],
                                         [
+                                            "Environment",
+                                            80
+                                        ],
+                                        [
+                                            "Security",
+                                            70
+                                        ],
+                                        [
+                                            "Infrastructure",
+                                            50
+                                        ],
+                                        [
                                             "Community",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Accountability",
@@ -2734,7 +2734,7 @@
                                         ],
                                         [
                                             "Services",
-                                            65
+                                            60
                                         ],
                                         [
                                             "Management",
@@ -2785,7 +2785,7 @@
                                         ],
                                         [
                                             "Opportunity",
-                                            40
+                                            30
                                         ],
                                         [
                                             "Extracurricular",
@@ -2793,7 +2793,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            30
+                                            40
                                         ],
                                         [
                                             "Policy",
@@ -2834,7 +2834,7 @@
                                         ],
                                         [
                                             "Opportunity",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Extracurricular",
@@ -2867,7 +2867,7 @@
                                         ],
                                         [
                                             "Funding",
-                                            75
+                                            70
                                         ],
                                         [
                                             "Equity",
@@ -2879,7 +2879,7 @@
                                         ],
                                         [
                                             "Community",
-                                            95
+                                            90
                                         ],
                                         [
                                             "Opportunity",
@@ -2895,7 +2895,7 @@
                                         ],
                                         [
                                             "Policy",
-                                            85
+                                            80
                                         ]
                                     ]
                                 },
@@ -2924,11 +2924,11 @@
                                         ],
                                         [
                                             "Safety",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Opportunity",
@@ -2940,7 +2940,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Policy",
@@ -2958,11 +2958,11 @@
                                     "issues": [
                                         [
                                             "Academics",
-                                            40
+                                            50
                                         ],
                                         [
                                             "Teachers",
-                                            30
+                                            40
                                         ],
                                         [
                                             "Quality",
@@ -2974,7 +2974,7 @@
                                         ],
                                         [
                                             "Equity",
-                                            50
+                                            60
                                         ],
                                         [
                                             "Safety",
@@ -2986,15 +2986,15 @@
                                         ],
                                         [
                                             "Opportunity",
-                                            40
+                                            50
                                         ],
                                         [
                                             "Extracurricular",
-                                            30
+                                            40
                                         ],
                                         [
                                             "Accountability",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Policy",
@@ -3007,19 +3007,19 @@
                                     "issues": [
                                         [
                                             "Academics",
-                                            60
-                                        ],
-                                        [
-                                            "Teachers",
-                                            50
-                                        ],
-                                        [
-                                            "Quality",
                                             70
                                         ],
                                         [
-                                            "Funding",
+                                            "Teachers",
+                                            60
+                                        ],
+                                        [
+                                            "Quality",
                                             80
+                                        ],
+                                        [
+                                            "Funding",
+                                            85
                                         ],
                                         [
                                             "Equity",
@@ -3027,27 +3027,27 @@
                                         ],
                                         [
                                             "Safety",
-                                            50
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            85
+                                            90
                                         ],
                                         [
                                             "Opportunity",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Extracurricular",
-                                            0
+                                            60
                                         ],
                                         [
                                             "Accountability",
-                                            75
+                                            85
                                         ],
                                         [
                                             "Policy",
-                                            50
+                                            70
                                         ]
                                     ]
                                 },
@@ -3068,7 +3068,7 @@
                                         ],
                                         [
                                             "Funding",
-                                            50
+                                            60
                                         ],
                                         [
                                             "Equity",
@@ -3092,7 +3092,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            90
+                                            80
                                         ],
                                         [
                                             "Policy",
@@ -3118,7 +3118,7 @@
                                         ],
                                         [
                                             "Quality",
-                                            0
+                                            50
                                         ],
                                         [
                                             "Funding",
@@ -3130,15 +3130,15 @@
                                         ],
                                         [
                                             "Safety",
-                                            60
+                                            70
                                         ],
                                         [
                                             "Community",
-                                            85
+                                            80
                                         ],
                                         [
                                             "Opportunity",
-                                            0
+                                            50
                                         ],
                                         [
                                             "Extracurricular",
@@ -3146,7 +3146,7 @@
                                         ],
                                         [
                                             "Accountability",
-                                            75
+                                            80
                                         ],
                                         [
                                             "Policy",
@@ -3159,11 +3159,11 @@
                                     "issues": [
                                         [
                                             "Academics",
-                                            20
+                                            0
                                         ],
                                         [
                                             "Teachers",
-                                            30
+                                            20
                                         ],
                                         [
                                             "Quality",
@@ -3175,7 +3175,7 @@
                                         ],
                                         [
                                             "Equity",
-                                            40
+                                            0
                                         ],
                                         [
                                             "Safety",
@@ -3187,7 +3187,7 @@
                                         ],
                                         [
                                             "Opportunity",
-                                            10
+                                            0
                                         ],
                                         [
                                             "Extracurricular",
@@ -3195,11 +3195,11 @@
                                         ],
                                         [
                                             "Accountability",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Policy",
-                                            60
+                                            0
                                         ]
                                     ]
                                 },
@@ -3216,7 +3216,7 @@
                                         ],
                                         [
                                             "Quality",
-                                            80
+                                            70
                                         ],
                                         [
                                             "Funding",
@@ -3224,7 +3224,7 @@
                                         ],
                                         [
                                             "Equity",
-                                            100
+                                            90
                                         ],
                                         [
                                             "Safety",
@@ -3232,11 +3232,11 @@
                                         ],
                                         [
                                             "Community",
-                                            70
+                                            80
                                         ],
                                         [
                                             "Opportunity",
-                                            50
+                                            70
                                         ],
                                         [
                                             "Extracurricular",
@@ -3244,11 +3244,11 @@
                                         ],
                                         [
                                             "Accountability",
-                                            40
+                                            50
                                         ],
                                         [
                                             "Policy",
-                                            30
+                                            0
                                         ]
                                     ]
                                 }
