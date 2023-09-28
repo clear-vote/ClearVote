@@ -40,10 +40,13 @@
                         <li>
                             <i class="fa {{ getIconForWord(issue[0]) }}"></i> {{ issue[0] }}
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: {{ issue[1] }}%;" aria-valuenow="{{ issue[1] }}" aria-valuemin="10" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: {{ (issue[1] / contest.max_issue_value) * 100 }}%;" 
+                                     aria-valuenow="{{ issue[1] }}" 
+                                     aria-valuemin="{{ contest.min_issue_value }}" 
+                                     aria-valuemax="{{ contest.max_issue_value }}"></div>
                             </div>
                         </li>
-
                         {% endfor %}
                     </ul>
                 </div>

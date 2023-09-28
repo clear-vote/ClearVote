@@ -24,36 +24,44 @@ class GPT:
         system_prompt += political_value_metric_string
         system_prompt += '''\n\nThe output should be an array of tuples in JSON format.
         For each tuple, index[0] contains the one-word category as a string, and index[1] should be your rating of how well 
-        the user input addresses that category. This rating can be from 0 to 100, but DO NOT ASSIGN TWO NON-ZERO CATAGORIES TO THE SAME RATING. 
+        the user input addresses that category. This rating can be from 0 to 100. 
         Consider both the positive and negative implications of the provided information when evaluating them, 
         with special consideration of their background, education, and past actions.'''
 
         openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-        response = openai.ChatCompletion.create(
-        model=gpt_model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
-                    "role": "user",
-                    "content": candidate_statement
-                }
-            ],
-            temperature=0,
-            max_tokens=500,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
-        )
+        while True:
+            try:
+                response = openai.ChatCompletion.create(
+                model=gpt_model,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": system_prompt
+                        },
+                        {
+                            "role": "user",
+                            "content": candidate_statement
+                        }
+                    ],
+                    temperature=0,
+                    max_tokens=500,
+                    top_p=1,
+                    frequency_penalty=0,
+                    presence_penalty=0
+                )
+                break
+            except:
+                print("ChatGPT needs to cooldown. Waiting 30 seconds...")
+                time.sleep(30)
         
         end_time = time.time()  # End timer
         duration_seconds = end_time - start_time
         print(f"      duration seconds: {round(duration_seconds, 2)}")
         
-        return json.loads(response['choices'][0]['message']['content'])
+        api_data = json.loads(response['choices'][0]['message']['content'])
+        print(api_data)
+        return api_data
     
     @staticmethod
     def iterate_contests_and_candidates(candidate_data_set, gpt_model, political_value_metric_set, rating_type):
@@ -113,17 +121,16 @@ class GPT:
     def _scale_ratings(issues, scalar):
         # Extract values from the nested list format
         total = sum([item[1] for item in issues])
-        
-        # If the total is 0, we can't perform division. Return the data as it is.
-        if total == 0:
-            return issues
             
         # Scale the values to sum up to the provided scalar (e.g., 100)
         scaled_data = []
         for item in issues:
             key, value = item
-            scaled_value = (value / total) * scalar
-            scaled_data.append([key, scaled_value])
+            if value == 0:
+                scaled_data.append([key, 0])
+            else:
+                scaled_value = (value / total) * scalar
+                scaled_data.append([key, scaled_value])
 
         return scaled_data
 
@@ -170,7 +177,7 @@ class GPT:
     @staticmethod
     def generate_new_pvm_dataset(candidate_data_set, generate_ranking_and_score_files, political_value_metric_set="/preprocessing/poltical_value_metric_sets/political_value_metrics_1.0.json",
                                  municipality="Seattle", state="WA", election_type="Primary", registration_deadline="1690243199", voting_open="1690588800",
-                                 voting_close="1690945200", gpt_model="gpt-3.5-turbo"):
+                                 voting_close="1690945200", gpt_model="gpt-4"):
         
         scores_json = GPT.iterate_contests_and_candidates(candidate_data_set,
                                                           gpt_model,
