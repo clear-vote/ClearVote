@@ -54,6 +54,8 @@ def init_app(app):
         if form.validate_on_submit():
             return redirect(url_for("registration", address=form.address.data))
         return render_template("address_lookup.html", form=form, title="ClearVote")
+    
+
 
     @app.route("/registration/<address>", methods=["GET", "POST"])
     def registration(address):
@@ -83,6 +85,12 @@ def init_app(app):
             rand_instance2 = Random(seed)  # Create another new Random instance with the same seed
             for contest in total_election:
                 shuffle(contest['candidates'], random=rand_instance2.random)
+            for contest in total_election:
+                max_value = max([max([issue[1] for issue in candidate['issues']]) for candidate in contest['candidates']])
+                min_value = min([min([issue[1] for issue in candidate['issues']]) for candidate in contest['candidates']])
+                
+                contest['max_issue_value'] = max_value
+                contest['min_issue_value'] = min_value
 
         except ValueError:
             return f"{ address } is not in a known Seattle precinct."

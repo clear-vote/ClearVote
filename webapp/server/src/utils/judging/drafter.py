@@ -11,7 +11,7 @@ class Drafter:
     """
     pass
 
-    CUTOFF = 10
+    CUTOFF = 0.01
 
     # This function extracts the last election data and recompiles only what is relevant for the user
     @staticmethod
