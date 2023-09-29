@@ -1,11 +1,12 @@
 """This module contains methods to gather all King County District data."""
 import json
 from typing import Dict, Set
+from pathlib import Path
 import requests
 import pandas as pd
 import geopandas as gpd
 from requests import Request, Session
-from shapely import Polygon, MultiPolygon
+from shapely import Polygon, MultiPolygon, wkt
 
 
 class KingCountyDistrictsParser:
@@ -51,9 +52,9 @@ class KingCountyDistrictsParser:
         while True:
             data_req.params["resultOffset"] = result_offset
             json_data = KingCountyDistrictsParser._as_json(data_req)
-            if len(json_data) == 0:
-                break
             data = json.loads(json_data)
+            if len(data["features"]) == 0:
+                break
             part = gpd.GeoDataFrame.from_features(data)
             table_parts.append(part)
             result_offset += KingCountyDistrictsParser.MAX_RECORD_COUNT
@@ -73,7 +74,7 @@ class KingCountyDistrictsParser:
             RuntimeError: if connection failed or invalid response from the given url.
         """
         try:
-            data_response = KingCountyDistrictsParser.session.get(data_req.prepare(), timeout=10)
+            data_response = KingCountyDistrictsParser.session.get(data_req.prepare().url, timeout=10)
             if not data_response.ok:
                 raise RuntimeError("Invalid response from server.")
             json_data = data_response.content
@@ -89,10 +90,13 @@ class KingCountyDistrictsParser:
     def get_tables(
         rename_map: Dict[str, str] = {
             "NAME": "name",
+            "CityName": "name",
             "LEGDST": "name",
             "CONGDST": "name",
             "kccdst": "name",
-        }
+        },
+        ignore: Set[str] = {"Voting precincts"},
+        local: bool = False
     ) -> Dict[str, gpd.GeoDataFrame]:
         """Gets the tables of geographic district data in the form of a dictionary keyed by the
             name of the district type.
@@ -102,38 +106,70 @@ class KingCountyDistrictsParser:
         Returns:
             A dictionary mapping distict types by name to geopandas GeoDataFrame with all
                 geo data for that type. Each dataframe contains a 'name' and 'geometry' column.
+            If true, reads from local directory
         Raises:
             RuntimeError: if connection failed or invalid response from the KingCo GIS service.
         """
-        table_info = KingCountyDistrictsParser._get_tables_info()
         tables = {}
+        if local:
+            directory = Path("data/Districts")
+            print([str(f) for f in directory.glob("*")], directory.resolve())
+            for filepath in directory.glob("*.csv"):
+                print(filepath)
+                full_filepath = str(filepath)
+                filename = filepath.stem
+
+                data = pd.read_csv(full_filepath, index_col=0)
+                data.set_index("name", inplace=True, drop=False)
+                data["geometry"] = data["geometry"].apply(wkt.loads)
+                data = gpd.GeoDataFrame(data, crs="epsg:4326")
+
+                tables[filename] = data
+            return tables
+
+        table_info = KingCountyDistrictsParser._get_tables_info()
+        
         for layer_id, row in table_info.iterrows():
             layer_name = row["name"]
-            data_req = Request(
-                url=f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query",
-                params={
-                    "where": "1=1",
-                    "timeRelation": "esriTimeRelationOverlaps",
-                    "geometryType": "esriGeometryEnvelope",
-                    "spatialRel": "esriSpatialRelIntersects",
-                    "units": "esriSRUnit_Foot",
-                    "returnGeometry": "true",
-                    "returnTrueCurves": "false",
-                    "returnIdsOnly": "false",
-                    "returnCountOnly": "false",
-                    "returnZ": "false",
-                    "returnM": "false",
-                    "returnDistinctValues": "false",
-                    "returnExtentOnly": "false",
-                    "sqlFormat": "none",
-                    "featureEncoding": "esriDefault",
-                    "f": "geojson",
-                },
-            )
-            layer_table = KingCountyDistrictsParser._get_geo_table(data_req)
-            layer_table.rename(columns=rename_map, inplace=True)
-            layer_table.set_index("name", inplace=True, drop=False)
-            tables[layer_name] = layer_table
+            if layer_name not in ignore:
+                formatted_layer_name = layer_name.lower().replace(" ", "_")
+                data_req = Request(
+                    url=f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query",
+                    params={
+                        "where": "1=1",
+                        "timeRelation": "esriTimeRelationOverlaps",
+                        "geometryType": "esriGeometryEnvelope",
+                        "spatialRel": "esriSpatialRelIntersects",
+                        "units": "esriSRUnit_Foot",
+                        "returnGeometry": "true",
+                        "returnTrueCurves": "false",
+                        "returnIdsOnly": "false",
+                        "returnCountOnly": "false",
+                        "returnZ": "false",
+                        "returnM": "false",
+                        "returnDistinctValues": "false",
+                        "returnExtentOnly": "false",
+                        "sqlFormat": "none",
+                        "featureEncoding": "esriDefault",
+                        "f": "geojson",
+                    }
+                )
+                layer_table = KingCountyDistrictsParser._get_geo_table(data_req)
+                layer_table.rename(columns=rename_map, inplace=True)
+                layer_table.set_index("name", inplace=True, drop=False)
+                tables[formatted_layer_name] = layer_table
+        
+        city_request = Request(
+            url="https://data.wsdot.wa.gov/arcgis/rest/services/Shared/PoliAdminBndryData/MapServer/1/query",
+            params={
+                "outFields": "*",
+                "where": "1=1",
+                "f": "geojson"
+            }
+        )
+        city_table = KingCountyDistrictsParser._get_geo_table(city_request)
+        city_table.rename(columns=rename_map, inplace=True)
+        tables["city"] = city_table
 
         return tables
 
@@ -161,8 +197,27 @@ class KingCountyDistrictsParser:
         base_url = "https://gisdata.kingcounty.gov/arcgis/rest/services/OpenDataPortal/district__votdst_area/MapServer/418/query"
 
         base_req = Request(
-            url=base_url, params={"outFields": "*", "where": "1=1", "f": "geojson"}
+            url=base_url, params={
+                "outFields": "*",
+                "where": "1=1",
+                "timeRelation": "esriTimeRelationOverlaps",
+                "geometryType": "esriGeometryEnvelope",
+                "spatialRel": "esriSpatialRelIntersects",
+                "units": "esriSRUnit_Foot",
+                "returnGeometry": "true",
+                "returnTrueCurves": "false",
+                "returnIdsOnly": "false",
+                "returnCountOnly": "false",
+                "returnZ": "false",
+                "returnM": "false",
+                "returnDistinctValues": "false",
+                "returnExtentOnly": "false",
+                "sqlFormat": "none",
+                "featureEncoding": "esriDefault",
+                "f": "geojson"
+            }
         )
+        print(base_req.prepare().url)
         precinct_table = KingCountyDistrictsParser._get_geo_table(base_req)
         precinct_table.rename(columns=rename_map, inplace=True)
         precinct_table.set_index("precinct_code", inplace=True, drop=False)
@@ -288,17 +343,21 @@ class KingCountyDistrictsParser:
                 precinct_districts = KingCountyDistrictsParser.get_boundaries_by_center(
                     precinct_table, district_table
                 )
-                print(type(precinct_districts))
-                precinct_districts = precinct_districts.add_prefix(
+
+                precinct_districts_names = precinct_districts.filter(["name"])
+
+                precinct_districts_names = precinct_districts_names.add_prefix(
                     f"{ formatted_name }_"
                 )
 
                 result = pd.merge(
                     result,
-                    precinct_districts,
+                    precinct_districts_names,
                     how="left",
                     left_index=True,
                     right_index=True,
                     validate="1:1",
                 )
+
+
         return result
