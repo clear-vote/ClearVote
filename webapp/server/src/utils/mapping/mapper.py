@@ -5,10 +5,12 @@ from urllib.parse import quote
 from shapely.geometry import Point
 
 # import geopandas
-# import pandas as pd
+import pandas as pd
 import requests
-from src.utils.data.data_loader import PrecinctLoader
-from src.utils.data.precinct import Precinct
+from data_loader import PrecinctLoader
+from precinct import Precinct
+# from ..data.data_loader import PrecinctLoader
+# from ..data.precinct import Precinct
 
 # 2d binary search of points - at each stage, look at points, divide vertically, go until smallest bounding box can be reached
 # reduction algo: state --> county --> precinct
@@ -20,6 +22,8 @@ class Mapper:
 
     # a pandas dataframe where each entry corresponds to a single precinct
     _precinct_table = PrecinctLoader.load_data()
+
+    _full_precinct_table, _district_tables = PrecinctLoader.load_precincts_and_districts()
 
     def _get_coord(self, address: str) -> Point:  # get coordinate given address
         """Gets the latitude/longitude coordinates for the given address.
@@ -62,8 +66,9 @@ class Mapper:
             raise RuntimeError(f"An error occurred: {exc}") from exc
 
     def _get_precinct(
-        self, coord: Point
-    ) -> Precinct:  # get precinct for given coordinates
+        self, coord: Point,
+        full_table: bool = False
+    ) -> Precinct or pd.Series:  # get precinct for given coordinates
         """Returns a Precinct object containing data about the precinct at the given coordinates.
 
         Args:
@@ -73,9 +78,14 @@ class Mapper:
         Raises:
             ValueError: if the given coordinates do not map to known precinct.
         """
-        geo_rows = Mapper._precinct_table.loc[
-            Mapper._precinct_table["shape"].contains(coord)
-        ]
+        if full_table:
+            geo_rows = Mapper._full_precinct_table.loc[
+                Mapper._full_precinct_table.contains(coord)
+            ]
+        else:
+            geo_rows = Mapper._precinct_table.loc[
+                Mapper._precinct_table.contains(coord)
+            ]
 
         if len(geo_rows) == 0:
             raise ValueError(
@@ -83,6 +93,8 @@ class Mapper:
             )
 
         geo_row = geo_rows.iloc[0]
+        if full_table:
+            return geo_row
         precinct = Precinct(
             code=geo_row["precinct_code"],
             name=geo_row["precinct_name"],
@@ -90,11 +102,11 @@ class Mapper:
             leg_dist=geo_row["leg_dist_code"],
             cong_dist=geo_row["cong_dist_code"],
             city_council_dist=geo_row["city_council_dist_code"],
-            poly=geo_row["shape"],
+            poly=geo_row["geometry"],
         )
         return precinct
 
-    def get_precinct(self, address: str) -> Precinct:  # get precinct for given address
+    def get_precinct(self, address: str) -> Precinct or pd.Series:  # get precinct for given address
         """Returns a Precinct object containing data about the precinct at the given address.
         Args:
             address: address to look up precinct for.
@@ -106,4 +118,8 @@ class Mapper:
             ValueError: if the given address does not map to known precinct.
         """
         coord = self._get_coord(address)
-        return self._get_precinct(coord)
+        try:
+            precinct =  self._get_precinct(coord, full_table=True)
+        except ValueError as exc:
+            raise ValueError(f"Given address ({ address }) does not map to a valid precinct") from exc
+        return precinct

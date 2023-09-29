@@ -90,10 +90,12 @@ class KingCountyDistrictsParser:
     def get_tables(
         rename_map: Dict[str, str] = {
             "NAME": "name",
+            "CityName": "name",
             "LEGDST": "name",
             "CONGDST": "name",
             "kccdst": "name",
         },
+        ignore: Set[str] = {"Voting precincts"},
         local: bool = False
     ) -> Dict[str, gpd.GeoDataFrame]:
         """Gets the tables of geographic district data in the form of a dictionary keyed by the
@@ -129,32 +131,45 @@ class KingCountyDistrictsParser:
         
         for layer_id, row in table_info.iterrows():
             layer_name = row["name"]
-            formatted_layer_name = layer_name.lower().replace(" ", "_")
-            data_req = Request(
-                url=f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query",
-                params={
-                    "where": "1=1",
-                    "timeRelation": "esriTimeRelationOverlaps",
-                    "geometryType": "esriGeometryEnvelope",
-                    "spatialRel": "esriSpatialRelIntersects",
-                    "units": "esriSRUnit_Foot",
-                    "returnGeometry": "true",
-                    "returnTrueCurves": "false",
-                    "returnIdsOnly": "false",
-                    "returnCountOnly": "false",
-                    "returnZ": "false",
-                    "returnM": "false",
-                    "returnDistinctValues": "false",
-                    "returnExtentOnly": "false",
-                    "sqlFormat": "none",
-                    "featureEncoding": "esriDefault",
-                    "f": "geojson",
-                }
-            )
-            layer_table = KingCountyDistrictsParser._get_geo_table(data_req)
-            layer_table.rename(columns=rename_map, inplace=True)
-            layer_table.set_index("name", inplace=True, drop=False)
-            tables[formatted_layer_name] = layer_table
+            if layer_name not in ignore:
+                formatted_layer_name = layer_name.lower().replace(" ", "_")
+                data_req = Request(
+                    url=f"https://gismaps.kingcounty.gov/arcgis/rest/services/Districts/KingCo_Electoral_Districts/MapServer/{ layer_id }/query",
+                    params={
+                        "where": "1=1",
+                        "timeRelation": "esriTimeRelationOverlaps",
+                        "geometryType": "esriGeometryEnvelope",
+                        "spatialRel": "esriSpatialRelIntersects",
+                        "units": "esriSRUnit_Foot",
+                        "returnGeometry": "true",
+                        "returnTrueCurves": "false",
+                        "returnIdsOnly": "false",
+                        "returnCountOnly": "false",
+                        "returnZ": "false",
+                        "returnM": "false",
+                        "returnDistinctValues": "false",
+                        "returnExtentOnly": "false",
+                        "sqlFormat": "none",
+                        "featureEncoding": "esriDefault",
+                        "f": "geojson",
+                    }
+                )
+                layer_table = KingCountyDistrictsParser._get_geo_table(data_req)
+                layer_table.rename(columns=rename_map, inplace=True)
+                layer_table.set_index("name", inplace=True, drop=False)
+                tables[formatted_layer_name] = layer_table
+        
+        city_request = Request(
+            url="https://data.wsdot.wa.gov/arcgis/rest/services/Shared/PoliAdminBndryData/MapServer/1/query",
+            params={
+                "outFields": "*",
+                "where": "1=1",
+                "f": "geojson"
+            }
+        )
+        city_table = KingCountyDistrictsParser._get_geo_table(city_request)
+        city_table.rename(columns=rename_map, inplace=True)
+        tables["city"] = city_table
 
         return tables
 
@@ -328,7 +343,8 @@ class KingCountyDistrictsParser:
                 precinct_districts = KingCountyDistrictsParser.get_boundaries_by_center(
                     precinct_table, district_table
                 )
-                precinct_districts_names = precinct_districts.drop("geometry", axis=1)
+
+                precinct_districts_names = precinct_districts.filter(["name"])
 
                 precinct_districts_names = precinct_districts_names.add_prefix(
                     f"{ formatted_name }_"
