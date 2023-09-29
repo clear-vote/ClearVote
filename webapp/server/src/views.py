@@ -6,6 +6,12 @@ from src.utils.data.precinct import Precinct
 from src.utils.judging.drafter import Drafter
 from urllib.parse import unquote
 from random import Random, randint, shuffle
+from firebase_admin import credentials, firestore
+import firebase_admin
+
+firebase_admin.initialize_app()
+
+db = firestore.client()
 
 def init_app(app):
     iconMapping = {
@@ -102,15 +108,27 @@ def init_app(app):
         return render_template("candidate_info.html", address=address, precinct=precinct, highlights_election=highlights_election, total_election=total_election)
 
     @app.route("/create_user/", methods=["GET", "POST"])
+
     def create_user():
         form = CreateUserForm()
         if form.validate_on_submit():
             name = form.name.data
-            email = form.email.data if form.email.data else None  # None if not provided
+            email = form.email.data if form.email.data else None
             phone = form.phone.data if form.phone.data else None
 
             if not email and not phone:
                 return "You must provide either an email or a phone number."
+
+            try:
+                # Save data to Firebase
+                users_ref = db.collection('users')
+                users_ref.add({
+                    'name': name,
+                    'email': email,
+                    'phone': phone
+                })
+            except TypeError:
+                raise print("database error")
 
             return redirect(url_for("thank_you", name=name, email=email, phone=phone))
 
