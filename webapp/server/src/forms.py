@@ -16,5 +16,5 @@ class CandidatePage(FlaskForm):
 class CreateUserForm(FlaskForm):
     name = StringField("Name")
     email = StringField("Email", validators=[Optional()])
-    phone = StringField("Phone (SMS carrier rates may apply)", validators=[Optional()])
+    phone = StringField("Phone (optional, SMS carrier rates may apply)", validators=[Optional()])
     submit = SubmitField("Create User")
