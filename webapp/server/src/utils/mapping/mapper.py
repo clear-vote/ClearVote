@@ -7,8 +7,8 @@ from shapely.geometry import Point
 # import geopandas
 import pandas as pd
 import requests
-from data_loader import PrecinctLoader
-from precinct import Precinct
+from .data_loader import PrecinctLoader
+from .precinct import Precinct
 # from ..data.data_loader import PrecinctLoader
 # from ..data.precinct import Precinct
 
@@ -119,7 +119,7 @@ class Mapper:
         """
         coord = self._get_coord(address)
         try:
-            precinct =  self._get_precinct(coord, full_table=True)
+            precinct = self._get_precinct(coord, full_table=True)
         except ValueError as exc:
             raise ValueError(f"Given address ({ address }) does not map to a valid precinct") from exc
         return precinct

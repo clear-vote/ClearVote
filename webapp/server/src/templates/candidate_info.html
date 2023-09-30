@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container my-5 text-center d-flex flex-column justify-content-center">
-    <p class="fw-bold h4">Voting information for "{{ address }}"; precinct: {{ precinct.get_name() }}</p>
+    <p class="fw-bold h4">Voting information for "{{ address }}"; precinct: {{ precinct['name'] }}</p>
     <!-- Implement switch here -->
     <button class="col-md-4 offset-md-4 col-10 offset-1 btn btn-outline-primary shadow my-3" onclick="toggleElections()" id="toggleBtn">Show all political value metrics</button>
     <div class="d-flex flex-column align-items-center" id="highlights">

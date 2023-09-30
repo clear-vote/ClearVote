@@ -1,7 +1,6 @@
 import json
 import os
 import random
-import logging
 import numpy as np
 import copy
 
@@ -54,9 +53,9 @@ class Drafter:
         with open(file_path, 'r') as f:
             json_data = json.load(f)
                 
-        # TODO: Ask Anaya how to import correct positions
         position_dict = {
-            "city_council": precinct.get_city_council_dist(),
+            "city_council": int(precinct['seattle_city_council_districts_name'][-1]),
+            "school_district_director": int(precinct['seattle_school_board_director_districts_name'][-1]),
             "port_commissioner": 5,
         }
 
@@ -124,12 +123,14 @@ class Drafter:
             json_data = json.load(f)
         
         position_dict = {
-            "city_council": precinct.get_city_council_dist(),
+            "city_council": int(precinct['seattle_city_council_districts_name'][-1]),
+            "school_district_director": int(precinct['seattle_school_board_director_districts_name'][-1]),
             "port_commissioner": 5,
         }
 
         precinct_data = Drafter._extract_election_data_for_precinct(json_data, position_dict)
         for contest in precinct_data:
+            print(contest)
             for candidate in contest['candidates']:
                 candidate['issues'] = sorted(candidate['issues'], key=lambda x: x[1], reverse=True)
                 candidate['issues'] = [(issue_name, issue_value) for issue_name, issue_value in candidate['issues'] if issue_value >= Drafter.CUTOFF]

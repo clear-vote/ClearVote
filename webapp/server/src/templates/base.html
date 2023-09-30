@@ -3,7 +3,6 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-
         <link rel="icon" href="{{ url_for('static', filename='assets/ClearVote_logo_1.png') }}" type="image/x-icon">
         {% if title %}
         <title>{{ title }}</title> 
@@ -12,14 +11,23 @@
         {% endif %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
         {% block head %} {% endblock %}
     </head>
     <body>
         {% block content %}
         {% endblock %}
 
+        <!-- TODO: Download and refer to Node package -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- TODO: refer to boostrap.min.js in node -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
-        {% block scripts %} {% endblock %}
+        {% block scripts %} 
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+        {% endblock %}
     </body>
 </html>
