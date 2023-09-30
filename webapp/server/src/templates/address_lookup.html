@@ -8,8 +8,10 @@
             <p>Our goal is to help the public stay up-to-date with off-cycle elections and understand who they are voting for</p>
         </div>
         <div>
-            <span class="pt-4">To get started, please enter a valid Seattle address</span>
-            <!--TODO: add a ? icon here that when you hover over it, a hover over says "why do you need this?" and if you click on it a popover shows up with some information-->
+            <span class="pb-4 mb-4">To get started, please enter a valid Seattle address.  </span>
+            <small tabindex="0" class="mt-2" data-toggle="tooltip" title="Why do you need this?" data-placement="top">
+                <a href="#" data-toggle="modal" data-target="#infoModal"><em>Why do you need this?</em></a>
+            </small>                    
             <form action="/address" method='post' autocomplete="off">
                 {{ form.hidden_tag() }}
                 <div class="pb-5">
@@ -23,4 +25,22 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <p>
+                Don't worry, we won't even store your address!
+                Your address helps us lookup your voting precinct.
+                With that, we can lookup your ballot and all the candidates on it.
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
 {% endblock %}
