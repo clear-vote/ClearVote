@@ -8,6 +8,9 @@ from urllib.parse import unquote
 from random import Random, randint, shuffle
 from firebase_admin import credentials, firestore
 import firebase_admin
+import os
+import json
+from datetime import datetime
 
 firebase_admin.initialize_app()
 
@@ -50,8 +53,7 @@ def init_app(app):
     
     @app.route("/")
     def index():
-        return redirect(url_for('address_lookup'))
-
+        return redirect(url_for('address_lookup'))\
 
     # Address lookup route
     @app.route("/address", methods=["GET", "POST"])
@@ -61,33 +63,56 @@ def init_app(app):
             return redirect(url_for("registration", address=form.address.data))
         return render_template("address_lookup.html", form=form, title="ClearVote")
     
-
-
     @app.route("/registration/<address>", methods=["GET", "POST"])
     def registration(address):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, 'utils', 'judging', 'composite_election_datasets', 'wa_king', 'wa_seattle_elections.json')
+        with open(file_path, 'r') as f:
+            json_data = json.load(f)
+
+        last_election = json_data["elections"][-1]
+
+        election_type = last_election["election_type"]
+        registration_deadline_date = datetime.utcfromtimestamp(int(last_election["registration_deadline"])).strftime('%Y-%m-%d')
+        voting_open_date = datetime.utcfromtimestamp(int(last_election["voting_open"])).strftime('%Y-%m-%d')
+        voting_close_date = datetime.utcfromtimestamp(int(last_election["voting_close"])).strftime('%Y-%m-%d')
+        
         form = RegistrationPage()
         if form.validate_on_submit():
             if form.is_registered.data:
                 return redirect(url_for("candidate_info", address=address))
             if form.not_registered.data:
                 return redirect("https://voter.votewa.gov/WhereToVote.aspx")
-        return render_template("registration_page.html", address=address, form=form)
+        
+        return render_template("registration_page.html", 
+                            address=address, 
+                            form=form, 
+                            election_type=election_type,
+                            registration_deadline_date=registration_deadline_date, 
+                            voting_open_date=voting_open_date, 
+                            voting_close_date=voting_close_date)
 
     @app.route("/address/<address>")
     def candidate_info(address):
         form = CandidatePage()
         mapper = Mapper()
         try:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            file_path = os.path.join(base_dir, 'utils', 'judging', 'composite_election_datasets', 'wa_king', 'wa_seattle_elections.json')
+            with open(file_path, 'r') as f:
+                json_data = json.load(f)
+
             # Define a seed value
             seed = randint(0, 10**6)
             precinct = mapper.get_precinct(address)
             # Shuffle candidates for highlights_election
-            highlights_election = Drafter.draft(precinct=precinct)
+            print(file_path)
+            highlights_election = Drafter.draft(precinct, json_data)
             rand_instance1 = Random(seed)  # Create a new Random instance with the seed
             for contest in highlights_election:
                 shuffle(contest['candidates'], random=rand_instance1.random)
             # Shuffle candidates for total_election
-            total_election = Drafter.get_contest_data(precinct)
+            total_election = Drafter.get_contest_data(precinct, json_data)
             rand_instance2 = Random(seed)  # Create another new Random instance with the same seed
             for contest in total_election:
                 shuffle(contest['candidates'], random=rand_instance2.random)
@@ -113,12 +138,15 @@ def init_app(app):
         form = CreateUserForm()
         if form.validate_on_submit():
             name = form.name.data
-            email = form.email.data if form.email.data else None
+            email = form.email.data
             phone = form.phone.data if form.phone.data else None
 
-            if not email and not phone:
-                return "You must provide either an email or a phone number."
+            if not name:
+                return "You must provide a name."
 
+            if not email:
+                return "You must provide an email."
+            
             try:
                 # Save data to Firebase
                 users_ref = db.collection('users')

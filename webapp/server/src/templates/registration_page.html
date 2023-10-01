@@ -3,7 +3,15 @@
 {% block content %}
   <div class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 text-center bg-light shadow p-4 rounded border border-grey">
-          <!--TODO: The most recent election in your area is...-->
+          <!-- Displaying the election dates -->
+          <div class="p-4">
+              <p class="h5">The next election is a {{election_type}} election</p>
+              <ul class="list-unstyled">
+                  <li>Polls and Ballot Boxes open on {{ voting_open_date }}</li>
+                  <li>Deadline to register for the next election is {{ registration_deadline_date }}</li>
+                  <li>Polls and Ballot Boxes close on {{ voting_close_date }}</li>
+              </ul>
+          </div>
           <div class="p-4">
               <p class="h4">Are you registered to vote?</p>
               <small>(or, have you moved recently)?</small>

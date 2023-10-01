@@ -45,13 +45,7 @@ class Drafter:
 
     # This is the drafting function. Definetly needs to be cleaned up
     @staticmethod
-    def draft(precinct):
-
-        # TODO: Decompose. This format MUST be followed for the server to be able to read it!!
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, 'composite_election_datasets', 'wa_king', 'wa_seattle_elections.json')
-        with open(file_path, 'r') as f:
-            json_data = json.load(f)
+    def draft(precinct, json_data):
                 
         position_dict = {
             "city_council": int(precinct['seattle_city_council_districts_name'][-1]),
@@ -115,12 +109,7 @@ class Drafter:
     
     # This function just sorts all the
     @staticmethod
-    def get_contest_data(precinct):
-        # TODO: Decompose. This format MUST be followed for the server to be able to read it!!
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, 'composite_election_datasets', 'wa_king', 'wa_seattle_elections.json')
-        with open(file_path, 'r') as f:
-            json_data = json.load(f)
+    def get_contest_data(precinct, json_data):
         
         position_dict = {
             "city_council": int(precinct['seattle_city_council_districts_name'][-1]),
@@ -130,7 +119,6 @@ class Drafter:
 
         precinct_data = Drafter._extract_election_data_for_precinct(json_data, position_dict)
         for contest in precinct_data:
-            print(contest)
             for candidate in contest['candidates']:
                 candidate['issues'] = sorted(candidate['issues'], key=lambda x: x[1], reverse=True)
                 candidate['issues'] = [(issue_name, issue_value) for issue_name, issue_value in candidate['issues'] if issue_value >= Drafter.CUTOFF]

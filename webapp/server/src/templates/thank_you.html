@@ -4,13 +4,13 @@
 <div class="container my-5 text-center d-flex flex-column justify-content-center vh-100">
     <h3 class="fw-bold h4">Thanks {{ name.split()[0] }}!</h3>
     <p class="col-md-6 offset-md-3 col-10 offset-1">
-        {% if email and not phone %}
-            We'll send an email to {{ email }} with your ballot information
-        {% elif phone and not email %}
-            We'll send a text to your phone at {{ phone }} with your ballot information
-        {% else %}
-            We'll send an email and a text with your ballot information
-        {% endif %}
+        We'll send an email to {{ email }} when the next election opens
+    </p>
+    <p class="col-md-6 offset-md-3 col-10 offset-1">
+        In the meantime, consider supporting us by following us on <a href="https://www.instagram.com/clear_vote/">Instagram</a>
+    </p>
+    <p class="col-md-6 offset-md-3 col-10 offset-1">
+        Clearvote is student run and student funded. If you'd like to learn more about our organization, you can email us at <a href="mailto:hello@clear-vote.org">hello@clear-vote.org</a>
     </p>
 </div>
 {% endblock %}

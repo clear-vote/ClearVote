@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="container my-5 text-center d-flex flex-column justify-content-center vh-100">
-    <p class="fw-bold h4">We'll keep you updated, just provide your name and either your Email or Phone (or both)</p>
+    <p class="fw-bold h4">We'll keep you updated, just provide your name and your email</p>
+    <p class="fw-bold h2"></p>
     <form action="{{ url_for('create_user') }}" method="post" class="col-md-4 offset-md-4 col-10 offset-1">
         {{ form.hidden_tag() }}
         <div class="mb-3">
@@ -17,6 +18,7 @@
             <label for="{{ form.phone.id }}" class="form-label">{{ form.phone.label.text }}</label>
             {{ form.phone(class="form-control") }}
         </div>
+        <br>
         <div class="mb-3">
             {{ form.submit(class="btn btn-outline-primary w-100 shadow") }}
         </div>
