@@ -1,0 +1,24 @@
+#error-container {
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+  margin: auto;
+  margin-top: auto;
+  width: 50%;
+}
+
+#logo-block {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#logo {
+  width: 100%;
+}
+
+#error-text-block {
+  text-align: center;
+}
+
+/*# sourceMappingURL=error.css.map */

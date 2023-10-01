@@ -18,4 +18,3 @@ class Config:
     PROJECT_ID = "clear-vote-app"
     SECRET_KEY = access_secret_version(PROJECT_ID, "SECRET_KEY")
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-    DEBUG = True

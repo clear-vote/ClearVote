@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "A voting app",
   "scripts": {
-    "compile_sass": "sass --watch scss:assets/css"
+    "compile_sass": "sass --watch static/scss:static/css"
   },
   "devDependencies": {
-    "sass": "^1.66.1"
+    "sass": "^1.68.0"
   },
   "dependencies": {
-    "bootstrap": "^5.3.1"
+    "bootstrap": "^5.3.1",
+    "picomatch": "^2.3.1"
   }
 }

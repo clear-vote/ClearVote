@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div id="error-container">
+        <div id="logo-block">
+            <img id="logo" src="{{ url_for('static', filename='assets/ClearVote_logo_1.png') }}">
+        </div>
+        <div id="error-text-block">
+            <h2>Sorry, {% block error_message %} {% endblock %}</h2>
+            <a href="{{ url_for('index') }}">Back to main page</a>
+        </div>
+    </div>
+{% endblock %}
