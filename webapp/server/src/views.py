@@ -2,11 +2,10 @@ from flask import current_app as app
 from flask import render_template, url_for, redirect, request
 from src.forms import AddressForm, CandidatePage, CreateUserForm, RegistrationPage
 from src.utils.mapping.mapper import Mapper
-from src.utils.data.precinct import Precinct
 from src.utils.judging.drafter import Drafter
 from urllib.parse import unquote
 from random import Random, randint, shuffle
-from firebase_admin import credentials, firestore
+from firebase_admin import firestore
 import firebase_admin
 import os
 import json

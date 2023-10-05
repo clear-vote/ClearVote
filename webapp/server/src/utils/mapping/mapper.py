@@ -6,8 +6,8 @@ from shapely.geometry import Point
 
 import pandas as pd
 import requests
-from geodata.data_loader import PrecinctLoader
-from geodata.precinct import Precinct
+from .geodata.data_loader import PrecinctLoader
+from .geodata.precinct import Precinct
 
 class Mapper:
     """This class contains methods to map addresses and coordinates to their precinct data."""
