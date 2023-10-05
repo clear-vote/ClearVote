@@ -4,18 +4,10 @@ import json
 from urllib.parse import quote
 from shapely.geometry import Point
 
-# import geopandas
 import pandas as pd
 import requests
-from .data_loader import PrecinctLoader
-from .precinct import Precinct
-# from ..data.data_loader import PrecinctLoader
-# from ..data.precinct import Precinct
-
-# 2d binary search of points - at each stage, look at points, divide vertically, go until smallest bounding box can be reached
-# reduction algo: state --> county --> precinct
-# look into python interfaces
-
+from geodata.data_loader import PrecinctLoader
+from geodata.precinct import Precinct
 
 class Mapper:
     """This class contains methods to map addresses and coordinates to their precinct data."""
