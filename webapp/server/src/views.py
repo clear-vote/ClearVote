@@ -179,4 +179,3 @@ def init_app(app):
     @app.errorhandler(400)
     def bad_request(e):
         return render_template('errors/400.html'), 400
-    
