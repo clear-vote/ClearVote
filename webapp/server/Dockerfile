@@ -1,24 +1,23 @@
-FROM continuumio/miniconda3
+# Use an official Python runtime as base image
+FROM python:3.9.6
 
 # Set working directory
-WORKDIR /app/src 
+WORKDIR /app/src
 
+# Install system dependencies
 RUN apt-get update && apt-get install -y gdal-bin libgdal-dev g++
 
-# Copy environment.yaml
-COPY environment.yaml /app/environment.yaml
+# Copy requirements.txt
+COPY requirements.txt /app/requirements.txt
 
-# Create conda environment
-RUN conda env create -f /app/environment.yaml
-
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "clearvote", "/bin/bash", "-c"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Set PYTHONPATH
 ENV PYTHONPATH /app
 
-# Copy the entire src directory:
+# Copy the entire src directory
 COPY ./src /app/src
 
 # Set the command to run your application:
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "clearvote", "python", "clearvote.py"]
+CMD ["python", "clearvote.py"]

@@ -3,20 +3,20 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - ca-certificates=2023.7.22=hf0a4a13_0
-  - libsqlite=3.43.0=hb31c410_0
-  - libzlib=1.2.13=h53f4e23_5
-  - ncurses=6.4=h7ea286d_0
-  - openssl=1.1.1w=h53f4e23_0
-  - pip=23.2.1=pyhd8ed1ab_0
-  - python=3.9.6=h54d631c_1_cpython
-  - readline=8.2=h92ec313_1
-  - setuptools=68.2.2=pyhd8ed1ab_0
-  - sqlite=3.43.0=h203b68d_0
-  - tk=8.6.13=hb31c410_0
-  - wheel=0.41.2=pyhd8ed1ab_0
-  - xz=5.2.6=h57fd34a_0
-  - zlib=1.2.13=h53f4e23_5
+  - ca-certificates=2023.7.22
+  - libsqlite=3.43.0
+  - libzlib=1.2.13
+  - ncurses=6.4
+  - openssl=1.1.1w
+  - pip=23.2.1
+  - python=3.9.6
+  - readline=8.2
+  - setuptools=68.2.2
+  - sqlite=3.43.0
+  - tk=8.6.13
+  - wheel=0.41.2
+  - xz=5.2.6
+  - zlib=1.2.13
   - pip:
       - attrs==23.1.0
       - beautifulsoup4==4.12.2
