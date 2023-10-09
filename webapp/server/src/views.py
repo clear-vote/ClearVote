@@ -106,7 +106,10 @@ def init_app(app):
             precinct = mapper.get_precinct(address)
             # Shuffle candidates for highlights_election
             print(file_path)
-            highlights_election = Drafter.draft(precinct, json_data)
+            try:
+                highlights_election = Drafter.draft(precinct, json_data)
+            except AttributeError as ae:
+                return redirect(url_for("coming_soon"))
             rand_instance1 = Random(seed)  # Create a new Random instance with the seed
             for contest in highlights_election:
                 shuffle(contest['candidates'], random=rand_instance1.random)
@@ -167,6 +170,11 @@ def init_app(app):
         phone = request.args.get('phone')
         email = request.args.get('email')
         return render_template("thank_you.html", name=name, email=email, phone=phone)
+    
+    @app.route("/coming-soon")
+    def coming_soon():
+        return render_template("coming_soon.html")
+        
 
     @app.errorhandler(404)
     def page_not_found(e):
