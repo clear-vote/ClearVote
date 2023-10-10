@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# secret information
+secrets/*
+
 # C extensions
 *.so
 
@@ -125,7 +128,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+# venv/
 ENV/
 env.bak/
 venv.bak/
