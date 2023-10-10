@@ -46,6 +46,9 @@ class Drafter:
     # This is the drafting function. Definetly needs to be cleaned up
     @staticmethod
     def draft(precinct, json_data):
+        city = precinct['city_name']
+        if city != 'Seattle':
+            raise AttributeError(f"Precinct { precinct } is not in Seattle")
                 
         position_dict = {
             "city_council": int(precinct['seattle_city_council_districts_name'][-1]),
