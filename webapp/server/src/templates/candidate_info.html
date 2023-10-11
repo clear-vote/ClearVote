@@ -3,7 +3,6 @@
 {% block content %}
 <div class="container my-5 text-center d-flex flex-column justify-content-center">
     <p class="fw-bold h4">Voting information for "{{ address }}"; precinct: {{ precinct['name'] }}</p>
-    <!-- Implement switch here -->
     <div class="d-flex flex-column align-items-center" id="highlights">
         {% for contest in highlights_election %}
         <div class="m-3 p-4 col-12 col-lg-8 offset-lg-2 rounded border border-black shadow bg-light">
@@ -55,12 +54,11 @@
         {% endfor %}
     </div>
     <div class="row">
-        <button class="offset-md-1 col-md-5 col-12 my-2 btn btn-outline-primary shadow" onclick="toggleElections()" id="toggleBtn">Show all political value metrics</button>
+        <button class="offset-md-1 col-md-5 col-12 my-2 btn btn-outline-primary shadow" onclick="toggleElections()" id="toggleBtn">Show all political focus metrics</button>
         <form action="/create_user" method="get" class="col-md-6 col-12 my-2">
             <input type="submit" value="Next" class="btn btn-outline-primary shadow" style="width: 80% !important; margin-left: 10%; margin-right: 10%;" />
         </form>
     </div>
-
 </div>
 {% endblock %}
 

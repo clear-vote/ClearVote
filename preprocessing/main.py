@@ -33,17 +33,7 @@ def get_user_input():
 
 
 if __name__ == '__main__':
-    candidate_data_set, generate_ranking_and_score_files = get_user_input()
-    GPT.generate_new_pvm_dataset(candidate_data_set, generate_ranking_and_score_files)
+    # candidate_data_set, generate_ranking_and_score_files = get_user_input()
+    # GPT.generate_new_pvm_dataset(candidate_data_set, generate_ranking_and_score_files)
 
-    # with open('preprocessing/election_datasets/ranked/07-28-23_rankings.json', 'r') as file:
-    #     rankings = json.load(file)
-    # with open('preprocessing/election_datasets/scored/07-28-23_scores.json', 'r') as file:
-    #     scores = json.load(file)
     
-    # composite_json = GPT.generate_composite_json(rankings, scores)
-    # print(composite_json)
-    
-    # composite_file_name = os.path.join('preprocessing', 'election_datasets', 'composite', 'wa_seattle_composite.json')
-    # with open(composite_file_name, 'w') as f:
-    #     json.dump(composite_json, f, indent=4)
