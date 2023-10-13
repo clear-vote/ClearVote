@@ -11,7 +11,7 @@ class RegistrationPage(FlaskForm):
     not_registered = SubmitField("No")
 
 class CandidatePage(FlaskForm):
-    Next = StringField("Next")
+    Next = StringField("Email me my candidate info!")
 
 class CreateUserForm(FlaskForm):
     name = StringField("Name")

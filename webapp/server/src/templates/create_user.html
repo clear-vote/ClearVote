@@ -2,26 +2,54 @@
 
 {% block content %}
 <div class="container my-5 text-center d-flex flex-column justify-content-center vh-100">
-    <p class="fw-bold h4">We'll keep you updated, just provide your name and your email</p>
-    <p class="fw-bold h2"></p>
-    <form action="{{ url_for('create_user') }}" method="post" class="col-md-4 offset-md-4 col-10 offset-1">
-        {{ form.hidden_tag() }}
-        <div class="mb-3">
-            <label for="{{ form.name.id }}" class="form-label">{{ form.name.label.text }}</label>
-            {{ form.name(class="form-control") }}
+    <div class="offset-md-2 col-md-8 text-center bg-light shadow p-4 rounded border border-grey">       
+        <p class="fw-bold h4 p-1 pt-2">We'll keep you updated, just provide your name and your email</p>
+        <div class="p-1 pb-2">
+            <a href="#" data-toggle="modal" data-target="#infoModal"><i>I don't feel comfortable giving you my information...</i></a>
+        </div>    
+        <p class="fw-bold h2"></p>
+        <form action="{{ url_for('create_user') }}" method="post" class="col-md-4 offset-md-4 col-10 offset-1">
+            {{ form.hidden_tag() }}
+            <div class="my-3">
+                <label for="{{ form.name.id }}" class="form-label">{{ form.name.label.text }}</label>
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.email.id }}" class="form-label">{{ form.email.label.text }}</label>
+                {{ form.email(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.phone.id }}" class="form-label">{{ form.phone.label.text }}</label>
+                {{ form.phone(class="form-control") }}
+            </div>
+            <br>
+            <div class="mb-3">
+                {{ form.submit(class="btn btn-outline-primary w-100 shadow") }}
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <p class="p-2">
+                ClearVote will <i>never</i> store your address or other information without your knowledge and consent. Period.
+            </p>
+            <p class="p-2">
+                Trust is built in inches and destroyed in miles. And we want you to trust us, because <i>you</i> have a vote to cast!
+            </p>
+            <p class="p-2">
+                The only reason we will ever message you is to inform you of upcoming elections and to remind you about voting registration.
+            </p>
+            <p class="p-2">
+                That's it. We don't want your data, and we don't want to sell you anything. (Though we will happily accept your donations and support!)
+            </p>
         </div>
-        <div class="mb-3">
-            <label for="{{ form.email.id }}" class="form-label">{{ form.email.label.text }}</label>
-            {{ form.email(class="form-control") }}
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        <div class="mb-3">
-            <label for="{{ form.phone.id }}" class="form-label">{{ form.phone.label.text }}</label>
-            {{ form.phone(class="form-control") }}
         </div>
-        <br>
-        <div class="mb-3">
-            {{ form.submit(class="btn btn-outline-primary w-100 shadow") }}
-        </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
