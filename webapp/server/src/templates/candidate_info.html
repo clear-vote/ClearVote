@@ -24,7 +24,7 @@
         </div>
         {% endfor %}
     </div>
-    <!--SHOW POLITICAL VALUE METRICS-->
+    <!--SHOW POLITICAL FOCUS METRICS-->
     <div class="d-flex flex-column align-items-center d-none" id="total">
         {% for contest in total_election %}
         <div class="m-3 p-4 col-12 col-lg-8 offset-lg-2 rounded border border-black shadow bg-light">
@@ -53,13 +53,47 @@
         </div>
         {% endfor %}
     </div>
+    <div class="p-3">
+        <a href="#" data-toggle="modal" data-target="#infoModal">Hold up, where is all this information coming from anyways?</a>
+    </div>    
     <div class="row">
-        <button class="offset-md-1 col-md-5 col-12 my-2 btn btn-outline-primary shadow" onclick="toggleElections()" id="toggleBtn">Show all political focus metrics</button>
+        <button class="offset-md-1 col-md-5 col-12 my-2 btn btn-outline-primary shadow" onclick="toggleElections()" id="toggleBtn">Show all <i>Political Focus Metrics</i></button>
         <form action="/create_user" method="get" class="col-md-6 col-12 my-2">
-            <input type="submit" value="Next" class="btn btn-outline-primary shadow" style="width: 80% !important; margin-left: 10%; margin-right: 10%;" />
+            <input type="submit" value="Email me my election info!" class="btn btn-outline-primary shadow" style="width: 80% !important; margin-left: 10%; margin-right: 10%;" />
         </form>
     </div>
 </div>
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <p class="p-1">
+                That's a great question!
+            </p>
+            <p class="p-1">
+                We try to come up with a list of <i>political focus metrics</i> that represent what issues candidates up for an election direct their energy towards in their campagin. We collect this information through open internet sources like voter pamphlets, social media posts, and candidate websites.
+            </p>
+            <p class="p-3">
+                <i>Ok, so how do you rate them?</i>
+            </p>
+            <p class="p-1">
+                We send a <i>prompt</i> to ChatGPT-4 with instructions to rate each candidate based on the information we collect on each <i>political focus metric</i> in that contest.
+            </p>
+            <p class="p-3">
+                <i>Isn't that biased?</i>
+            </p>
+            <p>
+                Absolutely. We are always looking for new ways to cut down on bias. One way we try to eliminate it is with the metrics we use themselves. While people might disagree on how we take action towards <i>homelessness</i> or <i>environment</i>, pretty much everyone can get behind these focuses some degree. The same logic holds for the AI that analyzes the candidate information we send it. It's forced to look at the information objectively, and not just with the political biases it may have.
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 {% endblock %}
 
 {% block scripts %}
@@ -72,7 +106,7 @@
     if (highlightsDiv.classList.contains("d-none")) {
       highlightsDiv.classList.remove("d-none");
       totalDiv.classList.add("d-none");
-      btn.innerHTML = "Show all Political Value Metrics";
+      btn.innerHTML = "Show all <i>Political Focus Metrics</i>";
     } else {
       highlightsDiv.classList.add("d-none");
       totalDiv.classList.remove("d-none");

@@ -6,7 +6,7 @@
             "election_type": "General",
             "registration_deadline": 1698710399,
             "voting_open": 1697760000,
-            "voting_close": 1690945200,
+            "voting_close": 1699358399,
             "contests": [
                 {
                     "contest_type": "city_council",

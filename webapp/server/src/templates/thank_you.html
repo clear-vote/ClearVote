@@ -2,15 +2,17 @@
 
 {% block content %}
 <div class="container my-5 text-center d-flex flex-column justify-content-center vh-100">
-    <h3 class="fw-bold h4">Thanks {{ name.split()[0] }}!</h3>
-    <p class="col-md-6 offset-md-3 col-10 offset-1">
+    <div class="offset-md-2 col-md-8 text-center bg-light shadow p-4 rounded border border-grey"> 
+    <h3 class="fw-bold h4 p-2">Thanks {{ name.split()[0] }}!</h3>
+    <p class="col-10 offset-1 p-2">
         We'll send an email to {{ email }} when the next election opens
     </p>
-    <p class="col-md-6 offset-md-3 col-10 offset-1">
+    <p class="col-10 offset-1 p-2">
         In the meantime, consider supporting us by following us on <a href="https://www.instagram.com/clear_vote/">Instagram</a>
     </p>
-    <p class="col-md-6 offset-md-3 col-10 offset-1">
+    <p class="col-10 offset-1 p-2">
         Clearvote is student run and student funded. If you'd like to learn more about our organization, you can email us at <a href="mailto:hello@clear-vote.org">hello@clear-vote.org</a>
     </p>
+    </div>
 </div>
 {% endblock %}

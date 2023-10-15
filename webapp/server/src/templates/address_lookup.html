@@ -3,21 +3,24 @@
 {% block content %}
 <div class="row justify-content-center align-items-center vh-100">
     <div class="col-md-6 text-center bg-light shadow p-4 rounded border border-grey">
-        <div class="p-4">
-            <h1>Welcome to ClearVote</h1>
-            <p>Our goal is to help the public stay up-to-date with off-cycle elections and understand who they are voting for</p>
-        </div>
         <div>
-            <span class="pb-4 mb-4">To get started, please enter a valid Seattle address.  </span>
-            <small tabindex="0" class="mt-2" data-toggle="tooltip" title="Why do you need this?" data-placement="top">
-                <a href="#" data-toggle="modal" data-target="#infoModal"><em>Why do you need this?</em></a>
-            </small>                    
+            <h1 class="p-3">Welcome to ClearVote!</h1>
+            <p class="p-2">A service built for communities, run by people who care about them.</p>
+            <p class="p-2">Our goal is to help the public stay up-to-date during local, off-cycle elections and understand who they are voting for.</p>
+            <div class="py-2">
+                <span>To get started, please enter a valid Seattle address.  </span>
+                <small tabindex="0" class="mt-2" data-toggle="tooltip" title="Why do you need this?" data-placement="top">
+                    <a href="#" data-toggle="modal" data-target="#infoModal"><em>Why do you need this?</em></a>
+                </small> 
+            </div>
+        </div>
+        <div class="p-2">
             <form action="/address" method='post' autocomplete="off">
                 {{ form.hidden_tag() }}
-                <div class="pb-5">
+                <div class="py-2">
                     {{ form.address(class="form-control shadow", placeholder="University of Washington, Seattle, WA") }}
                 </div>
-                <div>
+                <div class="py-2">
                     {{ form.submit(class="d-grid gap-2 col-sm-4 mx-auto mb-4 shadow btn btn-outline-primary") }}
                     <!--TODO: validate address before moving on-->
                 </div>
